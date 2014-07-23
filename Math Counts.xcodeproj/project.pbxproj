@@ -1,0 +1,689 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		97865E5ECF6E44C490887B2A /* libPods-MathCounts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 294509F555AC4C45B976D6E7 /* libPods-MathCounts.a */; };
+		C82C8DDD1961CCBA006C7FD2 /* RIPResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C82C8DDB1961CCB9006C7FD2 /* RIPResultsViewController.m */; };
+		C82C8DDE1961CCBA006C7FD2 /* RIPResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C82C8DDC1961CCB9006C7FD2 /* RIPResultsViewController.xib */; };
+		C83F28B7197940A600CF137B /* RIPSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C83F28B6197940A600CF137B /* RIPSettingsManager.m */; };
+		C85037FE197E8780002C553C /* RIPHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C85037FD197E8780002C553C /* RIPHomePageViewController.m */; };
+		C860318E197A10C000AEFB9A /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C860318D197A10C000AEFB9A /* Dropbox.framework */; };
+		C8603190197A113500AEFB9A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C860318F197A113500AEFB9A /* CFNetwork.framework */; };
+		C8603192197A114200AEFB9A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8603191197A114200AEFB9A /* Security.framework */; };
+		C8603194197A115500AEFB9A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8603193197A115500AEFB9A /* SystemConfiguration.framework */; };
+		C8603196197A116F00AEFB9A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C8603195197A116E00AEFB9A /* libc++.dylib */; };
+		C8603198197A117E00AEFB9A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C8603197197A117E00AEFB9A /* libz.dylib */; };
+		C860319A197A118700AEFB9A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8603199197A118700AEFB9A /* QuartzCore.framework */; };
+		C870CB3A19540E72004BFA51 /* RIPMainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C870CB3919540E72004BFA51 /* RIPMainMenuViewController.xib */; };
+		C870CB3E195423EB004BFA51 /* RIPTestConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C870CB3C195423EB004BFA51 /* RIPTestConfigViewController.m */; };
+		C870CB3F195423EB004BFA51 /* RIPTestConfigViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C870CB3D195423EB004BFA51 /* RIPTestConfigViewController.xib */; };
+		C895B5A5197D77470074AA11 /* RIPOperationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C895B5A4197D77470074AA11 /* RIPOperationButton.m */; };
+		C895B5A8197DD0790074AA11 /* RIPCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C895B5A7197DD0790074AA11 /* RIPCircleView.m */; };
+		C89618B719554F5300A82408 /* RIPCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C89618B519554F5300A82408 /* RIPCardViewController.m */; };
+		C89618B819554F5300A82408 /* RIPCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C89618B619554F5300A82408 /* RIPCardViewController.xib */; };
+		C89D035219539BD4002120F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D035119539BD4002120F2 /* Foundation.framework */; };
+		C89D035419539BD4002120F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D035319539BD4002120F2 /* CoreGraphics.framework */; };
+		C89D035619539BD4002120F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D035519539BD4002120F2 /* UIKit.framework */; };
+		C89D035E19539BD4002120F2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C89D035D19539BD4002120F2 /* main.m */; };
+		C89D036219539BD4002120F2 /* RIPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C89D036119539BD4002120F2 /* RIPAppDelegate.m */; };
+		C89D036419539BD4002120F2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C89D036319539BD4002120F2 /* Images.xcassets */; };
+		C89D036B19539BD4002120F2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D036A19539BD4002120F2 /* XCTest.framework */; };
+		C89D036C19539BD4002120F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D035119539BD4002120F2 /* Foundation.framework */; };
+		C89D036D19539BD4002120F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D035519539BD4002120F2 /* UIKit.framework */; };
+		C89D037519539BD4002120F2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C89D037319539BD4002120F2 /* InfoPlist.strings */; };
+		C89D037719539BD4002120F2 /* MathCountsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C89D037619539BD4002120F2 /* MathCountsTests.m */; };
+		C89D038219539BF0002120F2 /* RIPCard.m in Sources */ = {isa = PBXBuildFile; fileRef = C89D038119539BF0002120F2 /* RIPCard.m */; };
+		C89D038519539E7A002120F2 /* RIPDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C89D038419539E7A002120F2 /* RIPDataManager.m */; };
+		C89D038F1953B617002120F2 /* RIPMainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C89D038D1953B617002120F2 /* RIPMainMenuViewController.m */; };
+		C89D03941953B626002120F2 /* RIPTimeTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C89D03921953B626002120F2 /* RIPTimeTestViewController.m */; };
+		C8B2A9421977C39500C7696A /* RIPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B2A9401977C39500C7696A /* RIPSettingsViewController.m */; };
+		C8B2A9431977C39500C7696A /* RIPSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8B2A9411977C39500C7696A /* RIPSettingsViewController.xib */; };
+		C8B2A9471977C77800C7696A /* RIPSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B2A9451977C77800C7696A /* RIPSwitchCell.m */; };
+		C8B2A9481977C77800C7696A /* RIPSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8B2A9461977C77800C7696A /* RIPSwitchCell.xib */; };
+		C8CFD2F81961E1230080DC8E /* RIPCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8CFD2F61961E1230080DC8E /* RIPCardCell.m */; };
+		C8CFD2F91961E1230080DC8E /* RIPCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8CFD2F71961E1230080DC8E /* RIPCardCell.xib */; };
+		C8CFD310196351630080DC8E /* RIPTest.m in Sources */ = {isa = PBXBuildFile; fileRef = C8CFD30F196351630080DC8E /* RIPTest.m */; };
+		C8CFD3141963680D0080DC8E /* RIPTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8CFD3121963680D0080DC8E /* RIPTestCell.m */; };
+		C8CFD3151963680D0080DC8E /* RIPTestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8CFD3131963680D0080DC8E /* RIPTestCell.xib */; };
+		C8CFD31919636C9B0080DC8E /* RIPHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8CFD31719636C9B0080DC8E /* RIPHistoryViewController.m */; };
+		C8CFD31A19636C9B0080DC8E /* RIPHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C8CFD31819636C9B0080DC8E /* RIPHistoryViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C89D036E19539BD4002120F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C89D034619539BD4002120F2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C89D034D19539BD4002120F2;
+			remoteInfo = MathCounts;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C811E5C519736AAF007C79BB /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		120D22CDC09943A0B337D0A6 /* Pods-MathCounts.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MathCounts.xcconfig"; path = "Pods/Pods-MathCounts.xcconfig"; sourceTree = "<group>"; };
+		294509F555AC4C45B976D6E7 /* libPods-MathCounts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MathCounts.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C82C8DDA1961CCB9006C7FD2 /* RIPResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPResultsViewController.h; sourceTree = "<group>"; };
+		C82C8DDB1961CCB9006C7FD2 /* RIPResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPResultsViewController.m; sourceTree = "<group>"; };
+		C82C8DDC1961CCB9006C7FD2 /* RIPResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPResultsViewController.xib; sourceTree = "<group>"; };
+		C83F28B5197940A600CF137B /* RIPSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPSettingsManager.h; sourceTree = "<group>"; };
+		C83F28B6197940A600CF137B /* RIPSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPSettingsManager.m; sourceTree = "<group>"; };
+		C85037FC197E8780002C553C /* RIPHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPHomePageViewController.h; sourceTree = "<group>"; };
+		C85037FD197E8780002C553C /* RIPHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPHomePageViewController.m; sourceTree = "<group>"; };
+		C8503846197ECB7A002C553C /* Math Counts-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Math Counts-Info.plist"; sourceTree = "<group>"; };
+		C860318D197A10C000AEFB9A /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		C860318F197A113500AEFB9A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		C8603191197A114200AEFB9A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		C8603193197A115500AEFB9A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C8603195197A116E00AEFB9A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		C8603197197A117E00AEFB9A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		C8603199197A118700AEFB9A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C870CB3919540E72004BFA51 /* RIPMainMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPMainMenuViewController.xib; sourceTree = "<group>"; };
+		C870CB3B195423EB004BFA51 /* RIPTestConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPTestConfigViewController.h; sourceTree = "<group>"; };
+		C870CB3C195423EB004BFA51 /* RIPTestConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPTestConfigViewController.m; sourceTree = "<group>"; };
+		C870CB3D195423EB004BFA51 /* RIPTestConfigViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPTestConfigViewController.xib; sourceTree = "<group>"; };
+		C895B5A3197D77470074AA11 /* RIPOperationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPOperationButton.h; sourceTree = "<group>"; };
+		C895B5A4197D77470074AA11 /* RIPOperationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPOperationButton.m; sourceTree = "<group>"; };
+		C895B5A6197DD0790074AA11 /* RIPCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPCircleView.h; sourceTree = "<group>"; };
+		C895B5A7197DD0790074AA11 /* RIPCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPCircleView.m; sourceTree = "<group>"; };
+		C89618B419554F5300A82408 /* RIPCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPCardViewController.h; sourceTree = "<group>"; };
+		C89618B519554F5300A82408 /* RIPCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPCardViewController.m; sourceTree = "<group>"; };
+		C89618B619554F5300A82408 /* RIPCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPCardViewController.xib; sourceTree = "<group>"; };
+		C89D034E19539BD4002120F2 /* Math Counts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Math Counts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C89D035119539BD4002120F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C89D035319539BD4002120F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C89D035519539BD4002120F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C89D035B19539BD4002120F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C89D035D19539BD4002120F2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C89D035F19539BD4002120F2 /* Math Counts-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Math Counts-Prefix.pch"; sourceTree = "<group>"; };
+		C89D036019539BD4002120F2 /* RIPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RIPAppDelegate.h; sourceTree = "<group>"; };
+		C89D036119539BD4002120F2 /* RIPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RIPAppDelegate.m; sourceTree = "<group>"; };
+		C89D036319539BD4002120F2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C89D036919539BD4002120F2 /* Math CountsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Math CountsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C89D036A19539BD4002120F2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C89D037219539BD4002120F2 /* Math CountsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Math CountsTests-Info.plist"; sourceTree = "<group>"; };
+		C89D037419539BD4002120F2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C89D037619539BD4002120F2 /* MathCountsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MathCountsTests.m; sourceTree = "<group>"; };
+		C89D038019539BF0002120F2 /* RIPCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPCard.h; sourceTree = "<group>"; };
+		C89D038119539BF0002120F2 /* RIPCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPCard.m; sourceTree = "<group>"; };
+		C89D038319539E7A002120F2 /* RIPDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPDataManager.h; sourceTree = "<group>"; };
+		C89D038419539E7A002120F2 /* RIPDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPDataManager.m; sourceTree = "<group>"; };
+		C89D038C1953B616002120F2 /* RIPMainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPMainMenuViewController.h; sourceTree = "<group>"; };
+		C89D038D1953B617002120F2 /* RIPMainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPMainMenuViewController.m; sourceTree = "<group>"; };
+		C89D03911953B626002120F2 /* RIPTimeTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPTimeTestViewController.h; sourceTree = "<group>"; };
+		C89D03921953B626002120F2 /* RIPTimeTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPTimeTestViewController.m; sourceTree = "<group>"; };
+		C8B2A93F1977C39500C7696A /* RIPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPSettingsViewController.h; sourceTree = "<group>"; };
+		C8B2A9401977C39500C7696A /* RIPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPSettingsViewController.m; sourceTree = "<group>"; };
+		C8B2A9411977C39500C7696A /* RIPSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPSettingsViewController.xib; sourceTree = "<group>"; };
+		C8B2A9441977C77800C7696A /* RIPSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPSwitchCell.h; sourceTree = "<group>"; };
+		C8B2A9451977C77800C7696A /* RIPSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPSwitchCell.m; sourceTree = "<group>"; };
+		C8B2A9461977C77800C7696A /* RIPSwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPSwitchCell.xib; sourceTree = "<group>"; };
+		C8CFD2F51961E1230080DC8E /* RIPCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPCardCell.h; sourceTree = "<group>"; };
+		C8CFD2F61961E1230080DC8E /* RIPCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPCardCell.m; sourceTree = "<group>"; };
+		C8CFD2F71961E1230080DC8E /* RIPCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPCardCell.xib; sourceTree = "<group>"; };
+		C8CFD30E196351630080DC8E /* RIPTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPTest.h; sourceTree = "<group>"; };
+		C8CFD30F196351630080DC8E /* RIPTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPTest.m; sourceTree = "<group>"; };
+		C8CFD3111963680D0080DC8E /* RIPTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPTestCell.h; sourceTree = "<group>"; };
+		C8CFD3121963680D0080DC8E /* RIPTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPTestCell.m; sourceTree = "<group>"; };
+		C8CFD3131963680D0080DC8E /* RIPTestCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPTestCell.xib; sourceTree = "<group>"; };
+		C8CFD31619636C9B0080DC8E /* RIPHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPHistoryViewController.h; sourceTree = "<group>"; };
+		C8CFD31719636C9B0080DC8E /* RIPHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPHistoryViewController.m; sourceTree = "<group>"; };
+		C8CFD31819636C9B0080DC8E /* RIPHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPHistoryViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C89D034B19539BD4002120F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8603198197A117E00AEFB9A /* libz.dylib in Frameworks */,
+				C8603196197A116F00AEFB9A /* libc++.dylib in Frameworks */,
+				C860319A197A118700AEFB9A /* QuartzCore.framework in Frameworks */,
+				C8603194197A115500AEFB9A /* SystemConfiguration.framework in Frameworks */,
+				C8603192197A114200AEFB9A /* Security.framework in Frameworks */,
+				C8603190197A113500AEFB9A /* CFNetwork.framework in Frameworks */,
+				C89D035419539BD4002120F2 /* CoreGraphics.framework in Frameworks */,
+				C89D035619539BD4002120F2 /* UIKit.framework in Frameworks */,
+				C860318E197A10C000AEFB9A /* Dropbox.framework in Frameworks */,
+				C89D035219539BD4002120F2 /* Foundation.framework in Frameworks */,
+				97865E5ECF6E44C490887B2A /* libPods-MathCounts.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C89D036619539BD4002120F2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C89D036B19539BD4002120F2 /* XCTest.framework in Frameworks */,
+				C89D036D19539BD4002120F2 /* UIKit.framework in Frameworks */,
+				C89D036C19539BD4002120F2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C89D034519539BD4002120F2 = {
+			isa = PBXGroup;
+			children = (
+				C89D035719539BD4002120F2 /* Math Counts */,
+				C89D037019539BD4002120F2 /* MathCountsTests */,
+				C89D035019539BD4002120F2 /* Frameworks */,
+				C89D034F19539BD4002120F2 /* Products */,
+				120D22CDC09943A0B337D0A6 /* Pods-MathCounts.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		C89D034F19539BD4002120F2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C89D034E19539BD4002120F2 /* Math Counts.app */,
+				C89D036919539BD4002120F2 /* Math CountsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C89D035019539BD4002120F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C8603199197A118700AEFB9A /* QuartzCore.framework */,
+				C8603197197A117E00AEFB9A /* libz.dylib */,
+				C8603195197A116E00AEFB9A /* libc++.dylib */,
+				C8603193197A115500AEFB9A /* SystemConfiguration.framework */,
+				C8603191197A114200AEFB9A /* Security.framework */,
+				C860318F197A113500AEFB9A /* CFNetwork.framework */,
+				C860318D197A10C000AEFB9A /* Dropbox.framework */,
+				C89D035119539BD4002120F2 /* Foundation.framework */,
+				C89D035319539BD4002120F2 /* CoreGraphics.framework */,
+				C89D035519539BD4002120F2 /* UIKit.framework */,
+				C89D036A19539BD4002120F2 /* XCTest.framework */,
+				294509F555AC4C45B976D6E7 /* libPods-MathCounts.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C89D035719539BD4002120F2 /* Math Counts */ = {
+			isa = PBXGroup;
+			children = (
+				C89D036019539BD4002120F2 /* RIPAppDelegate.h */,
+				C89D036119539BD4002120F2 /* RIPAppDelegate.m */,
+				C89D038019539BF0002120F2 /* RIPCard.h */,
+				C89D038119539BF0002120F2 /* RIPCard.m */,
+				C8CFD30E196351630080DC8E /* RIPTest.h */,
+				C8CFD30F196351630080DC8E /* RIPTest.m */,
+				C89D038319539E7A002120F2 /* RIPDataManager.h */,
+				C89D038419539E7A002120F2 /* RIPDataManager.m */,
+				C83F28B5197940A600CF137B /* RIPSettingsManager.h */,
+				C83F28B6197940A600CF137B /* RIPSettingsManager.m */,
+				C85037FC197E8780002C553C /* RIPHomePageViewController.h */,
+				C85037FD197E8780002C553C /* RIPHomePageViewController.m */,
+				C895B5A6197DD0790074AA11 /* RIPCircleView.h */,
+				C895B5A7197DD0790074AA11 /* RIPCircleView.m */,
+				C895B5A3197D77470074AA11 /* RIPOperationButton.h */,
+				C895B5A4197D77470074AA11 /* RIPOperationButton.m */,
+				C89D038C1953B616002120F2 /* RIPMainMenuViewController.h */,
+				C89D038D1953B617002120F2 /* RIPMainMenuViewController.m */,
+				C870CB3919540E72004BFA51 /* RIPMainMenuViewController.xib */,
+				C8B2A93F1977C39500C7696A /* RIPSettingsViewController.h */,
+				C8B2A9401977C39500C7696A /* RIPSettingsViewController.m */,
+				C8B2A9411977C39500C7696A /* RIPSettingsViewController.xib */,
+				C8B2A9441977C77800C7696A /* RIPSwitchCell.h */,
+				C8B2A9451977C77800C7696A /* RIPSwitchCell.m */,
+				C8B2A9461977C77800C7696A /* RIPSwitchCell.xib */,
+				C8CFD31619636C9B0080DC8E /* RIPHistoryViewController.h */,
+				C8CFD31719636C9B0080DC8E /* RIPHistoryViewController.m */,
+				C8CFD31819636C9B0080DC8E /* RIPHistoryViewController.xib */,
+				C8CFD3111963680D0080DC8E /* RIPTestCell.h */,
+				C8CFD3121963680D0080DC8E /* RIPTestCell.m */,
+				C8CFD3131963680D0080DC8E /* RIPTestCell.xib */,
+				C870CB3B195423EB004BFA51 /* RIPTestConfigViewController.h */,
+				C870CB3C195423EB004BFA51 /* RIPTestConfigViewController.m */,
+				C870CB3D195423EB004BFA51 /* RIPTestConfigViewController.xib */,
+				C89D03911953B626002120F2 /* RIPTimeTestViewController.h */,
+				C89D03921953B626002120F2 /* RIPTimeTestViewController.m */,
+				C89618B419554F5300A82408 /* RIPCardViewController.h */,
+				C89618B519554F5300A82408 /* RIPCardViewController.m */,
+				C89618B619554F5300A82408 /* RIPCardViewController.xib */,
+				C82C8DDA1961CCB9006C7FD2 /* RIPResultsViewController.h */,
+				C82C8DDB1961CCB9006C7FD2 /* RIPResultsViewController.m */,
+				C82C8DDC1961CCB9006C7FD2 /* RIPResultsViewController.xib */,
+				C8CFD2F51961E1230080DC8E /* RIPCardCell.h */,
+				C8CFD2F61961E1230080DC8E /* RIPCardCell.m */,
+				C8CFD2F71961E1230080DC8E /* RIPCardCell.xib */,
+				C89D036319539BD4002120F2 /* Images.xcassets */,
+				C89D035819539BD4002120F2 /* Supporting Files */,
+			);
+			name = "Math Counts";
+			path = MathCounts;
+			sourceTree = "<group>";
+		};
+		C89D035819539BD4002120F2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C8503846197ECB7A002C553C /* Math Counts-Info.plist */,
+				C89D035A19539BD4002120F2 /* InfoPlist.strings */,
+				C89D035D19539BD4002120F2 /* main.m */,
+				C89D035F19539BD4002120F2 /* Math Counts-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C89D037019539BD4002120F2 /* MathCountsTests */ = {
+			isa = PBXGroup;
+			children = (
+				C89D037619539BD4002120F2 /* MathCountsTests.m */,
+				C89D037119539BD4002120F2 /* Supporting Files */,
+			);
+			path = MathCountsTests;
+			sourceTree = "<group>";
+		};
+		C89D037119539BD4002120F2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C89D037219539BD4002120F2 /* Math CountsTests-Info.plist */,
+				C89D037319539BD4002120F2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C89D034D19539BD4002120F2 /* Math Counts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C89D037A19539BD4002120F2 /* Build configuration list for PBXNativeTarget "Math Counts" */;
+			buildPhases = (
+				22CCD4DA5AEC4119859543FB /* Check Pods Manifest.lock */,
+				C89D034A19539BD4002120F2 /* Sources */,
+				C89D034B19539BD4002120F2 /* Frameworks */,
+				C89D034C19539BD4002120F2 /* Resources */,
+				C811E5C519736AAF007C79BB /* Copy Files */,
+				B20AD4ECE753476DBA081ACB /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Math Counts";
+			productName = MathCounts;
+			productReference = C89D034E19539BD4002120F2 /* Math Counts.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C89D036819539BD4002120F2 /* Math CountsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C89D037D19539BD4002120F2 /* Build configuration list for PBXNativeTarget "Math CountsTests" */;
+			buildPhases = (
+				C89D036519539BD4002120F2 /* Sources */,
+				C89D036619539BD4002120F2 /* Frameworks */,
+				C89D036719539BD4002120F2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C89D036F19539BD4002120F2 /* PBXTargetDependency */,
+			);
+			name = "Math CountsTests";
+			productName = MathCountsTests;
+			productReference = C89D036919539BD4002120F2 /* Math CountsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C89D034619539BD4002120F2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = RIP;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "String Education";
+				TargetAttributes = {
+					C89D036819539BD4002120F2 = {
+						TestTargetID = C89D034D19539BD4002120F2;
+					};
+				};
+			};
+			buildConfigurationList = C89D034919539BD4002120F2 /* Build configuration list for PBXProject "Math Counts" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C89D034519539BD4002120F2;
+			productRefGroup = C89D034F19539BD4002120F2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C89D034D19539BD4002120F2 /* Math Counts */,
+				C89D036819539BD4002120F2 /* Math CountsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C89D034C19539BD4002120F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C8B2A9431977C39500C7696A /* RIPSettingsViewController.xib in Resources */,
+				C8CFD2F91961E1230080DC8E /* RIPCardCell.xib in Resources */,
+				C82C8DDE1961CCBA006C7FD2 /* RIPResultsViewController.xib in Resources */,
+				C8B2A9481977C77800C7696A /* RIPSwitchCell.xib in Resources */,
+				C89618B819554F5300A82408 /* RIPCardViewController.xib in Resources */,
+				C8CFD3151963680D0080DC8E /* RIPTestCell.xib in Resources */,
+				C870CB3F195423EB004BFA51 /* RIPTestConfigViewController.xib in Resources */,
+				C89D036419539BD4002120F2 /* Images.xcassets in Resources */,
+				C870CB3A19540E72004BFA51 /* RIPMainMenuViewController.xib in Resources */,
+				C8CFD31A19636C9B0080DC8E /* RIPHistoryViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C89D036719539BD4002120F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C89D037519539BD4002120F2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		22CCD4DA5AEC4119859543FB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B20AD4ECE753476DBA081ACB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-MathCounts-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C89D034A19539BD4002120F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C89D038F1953B617002120F2 /* RIPMainMenuViewController.m in Sources */,
+				C8CFD3141963680D0080DC8E /* RIPTestCell.m in Sources */,
+				C895B5A5197D77470074AA11 /* RIPOperationButton.m in Sources */,
+				C89D038219539BF0002120F2 /* RIPCard.m in Sources */,
+				C895B5A8197DD0790074AA11 /* RIPCircleView.m in Sources */,
+				C8B2A9421977C39500C7696A /* RIPSettingsViewController.m in Sources */,
+				C8CFD310196351630080DC8E /* RIPTest.m in Sources */,
+				C89D036219539BD4002120F2 /* RIPAppDelegate.m in Sources */,
+				C83F28B7197940A600CF137B /* RIPSettingsManager.m in Sources */,
+				C8CFD2F81961E1230080DC8E /* RIPCardCell.m in Sources */,
+				C870CB3E195423EB004BFA51 /* RIPTestConfigViewController.m in Sources */,
+				C8CFD31919636C9B0080DC8E /* RIPHistoryViewController.m in Sources */,
+				C8B2A9471977C77800C7696A /* RIPSwitchCell.m in Sources */,
+				C82C8DDD1961CCBA006C7FD2 /* RIPResultsViewController.m in Sources */,
+				C89D03941953B626002120F2 /* RIPTimeTestViewController.m in Sources */,
+				C85037FE197E8780002C553C /* RIPHomePageViewController.m in Sources */,
+				C89D035E19539BD4002120F2 /* main.m in Sources */,
+				C89618B719554F5300A82408 /* RIPCardViewController.m in Sources */,
+				C89D038519539E7A002120F2 /* RIPDataManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C89D036519539BD4002120F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C89D037719539BD4002120F2 /* MathCountsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C89D036F19539BD4002120F2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C89D034D19539BD4002120F2 /* Math Counts */;
+			targetProxy = C89D036E19539BD4002120F2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C89D035A19539BD4002120F2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C89D035B19539BD4002120F2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C89D037319539BD4002120F2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C89D037419539BD4002120F2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C89D037819539BD4002120F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C89D037919539BD4002120F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C89D037B19539BD4002120F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 120D22CDC09943A0B337D0A6 /* Pods-MathCounts.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MathCounts/Math Counts-Prefix.pch";
+				INFOPLIST_FILE = "MathCounts/Math Counts-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "Math Counts";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C89D037C19539BD4002120F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 120D22CDC09943A0B337D0A6 /* Pods-MathCounts.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MathCounts/Math Counts-Prefix.pch";
+				INFOPLIST_FILE = "MathCounts/Math Counts-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PRODUCT_NAME = "Math Counts";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C89D037E19539BD4002120F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MathCounts.app/MathCounts";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MathCounts/MathCounts-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MathCountsTests/Math CountsTests-Info.plist";
+				PRODUCT_NAME = "Math CountsTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C89D037F19539BD4002120F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MathCounts.app/MathCounts";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MathCounts/MathCounts-Prefix.pch";
+				INFOPLIST_FILE = "MathCountsTests/Math CountsTests-Info.plist";
+				PRODUCT_NAME = "Math CountsTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C89D034919539BD4002120F2 /* Build configuration list for PBXProject "Math Counts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C89D037819539BD4002120F2 /* Debug */,
+				C89D037919539BD4002120F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C89D037A19539BD4002120F2 /* Build configuration list for PBXNativeTarget "Math Counts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C89D037B19539BD4002120F2 /* Debug */,
+				C89D037C19539BD4002120F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C89D037D19539BD4002120F2 /* Build configuration list for PBXNativeTarget "Math CountsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C89D037E19539BD4002120F2 /* Debug */,
+				C89D037F19539BD4002120F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C89D034619539BD4002120F2 /* Project object */;
+}
