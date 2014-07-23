@@ -260,14 +260,12 @@
     paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                 target:nil
                                                                 action:nil];
-    settingsItem = [[UIBarButtonItem alloc] initWithTitle:@"Buttons" style:UIBarButtonItemStylePlain target:self action:@selector(showSettings:)];
-    //settingsItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-    //                                                             target:self
-    //                                                             action:@selector(showSettings:)];
-    historyItem = [[UIBarButtonItem alloc] initWithTitle:@"Fuck" style:UIBarButtonItemStylePlain target:self action:@selector(showHistory:)];
-    //historyItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-    //                                                            target:self
-    //                                                            action:@selector(showHistory:)];
+    settingsItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                 target:self
+                                                                 action:@selector(showSettings:)];
+    historyItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
+                                                                target:self
+                                                                action:@selector(showHistory:)];
     
     //Configures toolbar
     self.settingsBar = [[UIToolbar alloc] init];
