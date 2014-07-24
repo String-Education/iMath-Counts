@@ -30,6 +30,8 @@
         }
     }
     
+    self.window.tintColor = [UIColor whiteColor];
+    
     //Sets UINavigationBar, UIBarButtonItem, and status bar text colors to white
     NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil];
     [[UIBarButtonItem appearance] setTitleTextAttributes:navbarTitleTextAttributes forState:UIControlStateNormal];

@@ -221,6 +221,8 @@
 {
     [super viewDidLoad];
     
+    UIImage *settingsImage;
+    UIImage *historyImage;
     UIBarButtonItem *settingsItem;
     UIBarButtonItem *historyItem;
     UIBarButtonItem *paddingItem;
@@ -257,15 +259,26 @@
 
     
     //Initializes toolbar items
+    settingsImage = [UIImage imageNamed:@"Settings"];
+    historyImage = [UIImage imageNamed:@"History"];
+    
     paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                 target:nil
                                                                 action:nil];
-    settingsItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                 target:self
-                                                                 action:@selector(showSettings:)];
-    historyItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-                                                                target:self
-                                                                action:@selector(showHistory:)];
+    settingsItem = [[UIBarButtonItem alloc] initWithImage:settingsImage
+                                                    style:UIBarButtonItemStylePlain
+                                                   target:self
+                                                   action:@selector(showSettings:)];
+    //settingsItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+    //                                                             target:self
+    //                                                             action:@selector(showSettings:)];
+    historyItem = [[UIBarButtonItem alloc] initWithImage:historyImage
+                                                   style:UIBarButtonItemStylePlain
+                                                  target:self
+                                                  action:@selector(showHistory:)];
+    //historyItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
+    //                                                            target:self
+    //                                                            action:@selector(showHistory:)];
     
     //Configures toolbar
     self.settingsBar = [[UIToolbar alloc] init];
