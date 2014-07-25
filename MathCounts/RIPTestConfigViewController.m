@@ -51,7 +51,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [super touchesBegan:touches withEvent:event];
+//    [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];
 }
 
@@ -185,6 +185,7 @@
     //Configures navigation bar to display the title the name
     //of the operation as well as a button to start the quiz
     self.nameField.delegate = self;
+    [self.nameField setEnablesReturnKeyAutomatically:NO];
     [self.nameField setKeyboardAppearance: UIKeyboardAppearanceDefault];
     self.nameField.returnKeyType = UIReturnKeyDone;
     

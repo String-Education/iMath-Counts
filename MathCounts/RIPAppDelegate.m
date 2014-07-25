@@ -38,6 +38,7 @@
     [[UIBarButtonItem appearance] setTitleTextAttributes:navbarTitleTextAttributes forState:UIControlStateNormal];
     [[UIBarButtonItem appearance] setTitleTextAttributes:disabledTextAttributes forState:UIControlStateDisabled];
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
+    [[UITextField appearance] setTintColor:[UIColor blackColor]];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     //Creates home page controller and places it in a navigation controller
