@@ -27,7 +27,7 @@
 
 #pragma mark Callback methods
 
-- (IBAction)returnToMainMenu:(id)sender
+- (void)returnToMainMenu:(id)sender
 {
     //Configures and displays alert warning user of exiting the quiz
      UIAlertView *quitAlert = [[UIAlertView alloc] initWithTitle:@"Quiz in progress"
@@ -80,15 +80,13 @@
         }
     }
     //First looks for any unviewed card after the current index
-    //if (!self.continueBackward) {
-        for (int i = pos + 1; i < [sharedManager.cardStore count]; i++) {
-            if (![(RIPCard *)sharedManager.cardStore[i] isAnswered]) {
-                index = i;
-                unansweredCardFound = YES;
-                break;
-            }
+    for (int i = pos + 1; i < [sharedManager.cardStore count]; i++) {
+        if (![(RIPCard *)sharedManager.cardStore[i] isAnswered]) {
+            index = i;
+            unansweredCardFound = YES;
+            break;
         }
-    //}
+    }
     //If none are found, looks before the current index
     if (!unansweredCardFound) {
         for (int i = 0; i < pos; i++) {

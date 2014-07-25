@@ -161,11 +161,11 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     //Set settings group headers here
-    //Pad 2 spaces for now
+    //Pad 4 spaces for now
     UILabel *header = [[UILabel alloc] init];
     switch (section) {
-        case 0: header.text = @"  Storage"; break;
-        case 1: header.text = @"  Security"; break;
+        case 0: header.text = @"    Storage"; break;
+        case 1: header.text = @"    Security"; break;
         default: header.text = nil; break;
     }
     return header;

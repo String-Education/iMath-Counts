@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RIPResultsViewController">
             <connections>
-                <outlet property="cardTableView" destination="OfC-bj-ndY" id="XPd-f9-uKc"/>
+                <outlet property="cardTableView" destination="5vU-Xg-Ukq" id="pGD-XW-KCI"/>
                 <outlet property="difficultyLabel" destination="JkK-Ai-kT7" id="YUi-EY-uKq"/>
                 <outlet property="questionsLabel" destination="Jbj-Uw-ecA" id="y1S-E8-krt"/>
                 <outlet property="timeLabel" destination="FcX-u2-rX0" id="T0y-hZ-3rK"/>
@@ -55,13 +55,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="OfC-bj-ndY">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="5vU-Xg-Ukq">
                     <rect key="frame" x="0.0" y="138" width="320" height="360"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="sNz-fB-Kti"/>
-                        <outlet property="delegate" destination="-1" id="0kJ-3x-iwM"/>
+                        <outlet property="dataSource" destination="-1" id="ORe-Oh-7OR"/>
+                        <outlet property="delegate" destination="-1" id="EWm-YI-lS1"/>
                     </connections>
                 </tableView>
             </subviews>
