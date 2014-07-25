@@ -23,6 +23,7 @@
 @property (strong, nonatomic) UIAlertView *passwordPrompt;
 @property (strong, nonatomic) UIAlertView *deleteAllPrompt;
 @property (nonatomic) BOOL deleteAll;
+@property (nonatomic) BOOL passwordEntered;
 
 @end
 
@@ -32,11 +33,19 @@
 
 #pragma mark Test management
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+        self.passwordEntered = NO;
+    return self;
+}
+
 - (void)deleteAllTests:(id)sender
 {
     RIPSettingsManager *sharedManager = [RIPSettingsManager sharedManager];
     self.deleteAll = YES;
-    if (sharedManager.passwordEnabled) {
+    if (sharedManager.passwordEnabled && !self.passwordEntered) {
         [self.passwordPrompt show];
     } else
         [self.deleteAllPrompt show];
@@ -101,6 +110,7 @@
         NSString *inputPassword = [[alertView textFieldAtIndex:0] text];
         if (buttonIndex == alertView.firstOtherButtonIndex) {
             if ([inputPassword isEqualToString:settingsManager.password]) {
+                self.passwordEntered = YES;
                 if (!self.deleteAll)
                     [self deleteOneTest];
                 else
@@ -160,7 +170,7 @@
         //Removes deleted cell and removes corresponding test from the testStore
         RIPSettingsManager *settingsManager = [RIPSettingsManager sharedManager];
         self.cellIndexPath = indexPath;
-        if (settingsManager.password) {
+        if (settingsManager.password && !self.passwordEntered) {
             [self.passwordPrompt show];
         } else {
             [self deleteOneTest];
