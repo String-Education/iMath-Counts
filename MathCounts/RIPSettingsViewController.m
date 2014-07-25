@@ -185,6 +185,8 @@
 {
     [super viewDidLoad];
     
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
+    
     //Registers custom UITableViewCell nib and configures navigationItem
     UINib *settingsCellNib = [UINib nibWithNibName:@"RIPSwitchCell" bundle:nil];
     [self.settingsTableView registerNib:settingsCellNib forCellReuseIdentifier:@"RIPSwitchCell"];

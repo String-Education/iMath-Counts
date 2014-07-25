@@ -72,7 +72,7 @@
                                    animated:YES
                                  completion:nil];
     self.navigationItem.leftBarButtonItem = nil;
-
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)showBackButton:(id)sender
@@ -82,7 +82,9 @@
                                                      style:UIBarButtonItemStyleDone
                                                     target:self
                                                     action:@selector(goHome:)];
+    
     self.navigationItem.leftBarButtonItem = self.backItem;
+    self.navigationItem.rightBarButtonItem = self.tvc.startItem;
 }
 
 - (void)hideBackButton:(id)sender
@@ -193,8 +195,10 @@
                                                             target:self
                                                             action:@selector(goHome:)];
             self.navigationItem.leftBarButtonItem = self.backItem;
+            self.navigationItem.rightBarButtonItem = self.tvc.startItem;
         } else {
             self.navigationItem.leftBarButtonItem = nil;
+            self.navigationItem.rightBarButtonItem = nil;
         }
     }
 }
@@ -226,6 +230,8 @@
     UIBarButtonItem *settingsItem;
     UIBarButtonItem *historyItem;
     UIBarButtonItem *paddingItem;
+    
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
     
     //Creates views to display and populates them in a UIPageViewController
     self.mvc = [[RIPMainMenuViewController alloc] init];
@@ -269,16 +275,10 @@
                                                     style:UIBarButtonItemStylePlain
                                                    target:self
                                                    action:@selector(showSettings:)];
-    //settingsItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-    //                                                             target:self
-    //                                                             action:@selector(showSettings:)];
     historyItem = [[UIBarButtonItem alloc] initWithImage:historyImage
                                                    style:UIBarButtonItemStylePlain
                                                   target:self
                                                   action:@selector(showHistory:)];
-    //historyItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
-    //                                                            target:self
-    //                                                            action:@selector(showHistory:)];
     
     //Configures toolbar
     self.settingsBar = [[UIToolbar alloc] init];

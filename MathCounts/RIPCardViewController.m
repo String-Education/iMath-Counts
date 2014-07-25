@@ -75,6 +75,8 @@
     //Loads sharedManager to access its cardStore
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     //Gets card at index

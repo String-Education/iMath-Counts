@@ -258,6 +258,8 @@
 {
     [super viewDidLoad];
     
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
+    
     UINib *testCellNib;
     UIBarButtonItem *deleteAllItem;
     UIBarButtonItem *doneItem;
@@ -317,6 +319,9 @@
             }
         }
     }
+    [self.testTableView setAlwaysBounceVertical:NO];
+    self.testTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.testTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 @end

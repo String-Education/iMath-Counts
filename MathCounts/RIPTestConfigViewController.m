@@ -14,9 +14,10 @@
 <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *difficultyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *backgroundLabel;
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UIPickerView *settingsPicker;
-@property (weak, nonatomic) IBOutlet UIButton *startTestButton;
 @property (nonatomic) NSInteger numQuestions;
 @property (nonatomic) NSInteger difficulty;
 @property (nonatomic) NSInteger time;
@@ -29,6 +30,18 @@
 #pragma mark
 
 @implementation RIPTestConfigViewController
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.startItem = [[UIBarButtonItem alloc] initWithTitle:@"Start"
+                                                          style:UIBarButtonItemStylePlain
+                                                         target:self
+                                                         action:@selector(startQuiz:)];
+    }
+    return self;
+}
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
 {
@@ -167,23 +180,27 @@
     
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
+    
     //Configures navigation bar to display the title the name
     //of the operation as well as a button to start the quiz
-    
     self.nameField.delegate = self;
     [self.nameField setKeyboardAppearance: UIKeyboardAppearanceDefault];
     self.nameField.returnKeyType = UIReturnKeyDone;
     
-    if ([sharedManager.operation isEqualToString:ADDITION])
-        [self.startTestButton setBackgroundColor:[UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0]];
-    else if ([sharedManager.operation isEqualToString:SUBTRACTION])
-        [self.startTestButton setBackgroundColor:[UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0]];
-    else if ([sharedManager.operation isEqualToString:MULTIPLICATION])
-        [self.startTestButton setBackgroundColor:[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0]];
-    else if ([sharedManager.operation isEqualToString:DIVISION])
-        [self.startTestButton setBackgroundColor:[UIColor purpleColor]];
-    else
-        [self.startTestButton setBackgroundColor:[UIColor darkGrayColor]];
+    if ([sharedManager.operation isEqualToString:ADDITION]) {
+        [self.backgroundLabel setBackgroundColor:[UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0]];
+        [self.backgroundView setBackgroundColor:[UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0]];
+    } else if ([sharedManager.operation isEqualToString:SUBTRACTION]) {
+        [self.backgroundLabel setBackgroundColor:[UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0]];
+        [self.backgroundView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0]];
+    } else if ([sharedManager.operation isEqualToString:MULTIPLICATION]) {
+        [self.backgroundLabel setBackgroundColor:[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0]];
+        [self.backgroundView setBackgroundColor:[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0]];
+    } else if ([sharedManager.operation isEqualToString:DIVISION]) {
+        [self.backgroundLabel setBackgroundColor:[UIColor purpleColor]];
+        [self.backgroundView setBackgroundColor:[UIColor purpleColor]];
+    }
     
     if ([sharedManager.operation isEqualToString:MULTIPLICATION])
         self.difficultyLabel.text = @"Multiplier";

@@ -34,7 +34,9 @@
     
     //Sets UINavigationBar, UIBarButtonItem, and status bar text colors to white
     NSDictionary *navbarTitleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil];
+    NSDictionary *disabledTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor], NSForegroundColorAttributeName, nil];
     [[UIBarButtonItem appearance] setTitleTextAttributes:navbarTitleTextAttributes forState:UIControlStateNormal];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:disabledTextAttributes forState:UIControlStateDisabled];
     [[UINavigationBar appearance] setTitleTextAttributes:navbarTitleTextAttributes];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     

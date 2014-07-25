@@ -10,4 +10,6 @@
 
 @interface RIPTestConfigViewController : UIViewController
 
+@property (strong, nonatomic) UIBarButtonItem *startItem;
+
 @end

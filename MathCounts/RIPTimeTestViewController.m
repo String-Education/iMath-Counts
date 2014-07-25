@@ -230,6 +230,8 @@
     RIPCardViewController *initialViewController;
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
+    
     //Creates and displays the timer with an initial time
     time = sharedManager.time;
     if (time) {
@@ -252,6 +254,7 @@
     self.navigationItem.leftBarButtonItem = returnItem;
     
     self.submitItem = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(submitTest:)];
+    
     [self.submitItem setEnabled:NO];
     self.navigationItem.rightBarButtonItem = self.submitItem;
     

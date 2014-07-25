@@ -77,6 +77,8 @@
 {
     [super viewDidLoad];
     
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
+    
     //Configures and displays buttons based on empty views in .xib
     UIColor *additionColor = [UIColor colorWithRed:0.86 green:0.0 blue:0.0 alpha:0.32];
     UIColor *subtractionColor = [UIColor colorWithRed:0.0 green:0.46 blue:0.68 alpha:0.32];

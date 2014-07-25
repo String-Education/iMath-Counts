@@ -129,7 +129,6 @@
         cell.questionCorrectLabel.textColor = [UIColor greenColor];
         cell.correctAnswerLabel.text = @"";
     }
-
     return cell;
 }
 
@@ -148,6 +147,8 @@
     UINib *cardCellNib;
     UIBarButtonItem *homeItem;
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
+    
+    [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
     
     correctQuestions = 0;
     if (self.isNewTest) {
@@ -242,6 +243,9 @@
     cardCellNib = [UINib nibWithNibName:@"RIPCardCell" bundle:nil];
     [self.cardTableView registerNib:cardCellNib forCellReuseIdentifier:@"RIPCardCell"];
     [self.cardTableView setAllowsSelection:NO];
+    [self.cardTableView setAlwaysBounceVertical:NO];
+    self.cardTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.cardTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 @end
