@@ -49,6 +49,7 @@
 
 - (BOOL)textField:(UITextField *)field shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)characters
 {
+    NSString *test;
     NSCharacterSet *charactersToBlock = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
     return ([characters rangeOfCharacterFromSet:charactersToBlock].location == NSNotFound);
 }
