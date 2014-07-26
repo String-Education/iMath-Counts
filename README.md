@@ -10,6 +10,6 @@ Math Counts is a simple timed test application that allows users to take flash c
 - Option to upload test results to Dropbox
 
 ## To-do
-~ - Update Dropbox functionality ~
+- ~~Update Dropbox functionality~~
 - Add "challenge mode"
 - Consider other cloud storage functionality
