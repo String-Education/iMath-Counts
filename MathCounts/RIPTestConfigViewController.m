@@ -31,6 +31,8 @@
 
 @implementation RIPTestConfigViewController
 
+#pragma mark Initializers
+
 - (instancetype)init
 {
     self = [super init];
@@ -41,6 +43,14 @@
                                                          action:@selector(startQuiz:)];
     }
     return self;
+}
+
+#pragma mark UITextField methods
+
+- (BOOL)textField:(UITextField *)field shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)characters
+{
+    NSCharacterSet *charactersToBlock = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+    return ([characters rangeOfCharacterFromSet:charactersToBlock].location == NSNotFound);
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
@@ -54,9 +64,9 @@
     [self.view endEditing:YES];
 }
 
-#pragma mark IBAction for Start button
+#pragma mark Callbacks
 
-- (IBAction)startQuiz:(id)sender
+- (void)startQuiz:(id)sender
 {
     NSArray *components;
     
