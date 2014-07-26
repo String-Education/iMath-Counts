@@ -97,7 +97,7 @@
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = documentDirectories[0];
-    return [documentDirectory stringByAppendingString:@"todaysTests.archive"];
+    return [documentDirectory stringByAppendingPathComponent:@"todaysTests.archive"];
 }
 
 
@@ -276,7 +276,7 @@ NSArray *getEasyAddition(NSInteger numQuestions)
                 questionValues[i][0] = ItoN(arc4random_uniform(11));
                 questionValues[i][1] = ItoN(arc4random_uniform(11));
             }
-        } while (checkExists(questionValues, i, numQuestions/10));
+        } while (checkExists(questionValues, i, numQuestions / 7));
         questionValues[i][2] = ItoN(NtoI(questionValues[i][0]) + NtoI(questionValues[i][1]));
     }
     return questionValues;
@@ -316,7 +316,7 @@ NSArray *getMediumAddition(NSInteger numQuestions)
                     questionValues[i][1] = ItoN(getWeightedRandom(15, 4));
                 } while (NtoI(questionValues[i][1]) <= 15 || NtoI(questionValues[i][1]) > 25);
             }
-        } while (checkExists(questionValues, i, numQuestions/10));
+        } while (checkExists(questionValues, i, numQuestions / 10));
         questionValues[i][2] = ItoN(NtoI(questionValues[i][0]) + NtoI(questionValues[i][1]));
     }
     return questionValues;
@@ -428,7 +428,7 @@ NSArray *getEasySubtraction(NSInteger numQuestions)
                 firstNum = arc4random_uniform(11);
                 secondNum = arc4random_uniform(11);
             }
-        } while (checkExistsRepeats(questionValues, i, firstNum, secondNum, numQuestions/10));
+        } while (checkExistsRepeats(questionValues, i, firstNum, secondNum, numQuestions / 7));
         
         questionValues[i][0] = ItoN(firstNum + secondNum);
         questionValues[i][1] = ItoN(firstNum);

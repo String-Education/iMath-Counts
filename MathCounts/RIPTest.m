@@ -25,43 +25,45 @@
 
 + (instancetype)generateTest
 {
-    NSString *monthYear;
-    NSString *day;
-    
     //Initializes test and generates an .xls document if Dropbox option is enabled
     RIPTest *t = [[RIPTest alloc] initPrivate];
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    [dateFormatter setDateFormat:@"MMMM y"];
-    monthYear = [dateFormatter stringFromDate:t.dateTaken];
-    
-    [dateFormatter setDateFormat:@"EEEE, MMMM d"];
-    day = [dateFormatter stringFromDate:t.dateTaken];
-    
-    DBPath *monthYearPath = [[DBPath alloc] initWithString:monthYear];
-    DBPath *dayPath = [monthYearPath childPath:day];
-    
-    DBPath *testsPath = [dayPath childPath:@"Tests"];
     
     DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
     if (account) {
         dispatch_queue_t uploader = dispatch_queue_create("backgroundUploader", NULL);
         dispatch_async(uploader, ^{
+            
             DBFile *todaysTests;
+            NSString *monthYear;
+            NSString *day;
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             
             [t generateXLS];
             [sharedManager addToTodaysTests:t];
             [t generateTodaysTests];
+            
+            [dateFormatter setDateFormat:@"MMMM y"];
+            monthYear = [dateFormatter stringFromDate:t.dateTaken];
+            
+            [dateFormatter setDateFormat:@"EEEE, MMMM d"];
+            day = [dateFormatter stringFromDate:t.dateTaken];
+            
+            DBPath *monthYearPath = [[DBPath alloc] initWithString:monthYear];
+            DBPath *dayPath = [monthYearPath childPath:day];
+            
+            DBPath *testsPath = [dayPath childPath:@"Tests"];
             DBPath *testPath = [testsPath childPath:[t XLSName]];
+            
             DBPath *todaysTestsPath = [dayPath childPath:[t todaysTestsXLSName]];
             //DBError *error = [[DBError alloc] init];
-            if (!todaysTestsPath)
+            if (![[DBFilesystem sharedFilesystem] fileInfoForPath:todaysTestsPath error:nil])
                 todaysTests = [[DBFilesystem sharedFilesystem] createFile:todaysTestsPath error:nil];
             else
                 todaysTests = [[DBFilesystem sharedFilesystem] openFile:todaysTestsPath error:nil];
             DBFile *test = [[DBFilesystem sharedFilesystem] createFile:testPath error:nil];
+            
             [todaysTests writeContentsOfFile:[t todaysTestsXLSPath] shouldSteal:YES error:nil];
             [test writeContentsOfFile:[t XLSPath] shouldSteal:YES error:nil];
         });
