@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) NSMutableArray *privateCardStore;
 @property (strong, nonatomic) NSMutableArray *privateTestStore;
+@property (strong, nonatomic) NSMutableArray *privateTodaysTests;
 @property (nonatomic) NSInteger numQuestions;
 
 @end
@@ -41,11 +42,25 @@
 {
     //Private init method
     self = [super init];
+    
+    NSString *testDate;
+    NSString *currentDate;
+    
     if (self) {
         self.privateTestStore = [NSKeyedUnarchiver unarchiveObjectWithFile:[self testArchivePath]];
-        if (!self.privateTestStore) {
+        if (!self.privateTestStore)
             self.privateTestStore = [[NSMutableArray alloc] init];
+        
+        self.privateTodaysTests = [NSKeyedUnarchiver unarchiveObjectWithFile:[self todaysTestsArchivePath]];
+        if (self.privateTodaysTests) {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            RIPTest *t = self.privateTodaysTests[0];
+            testDate = [dateFormatter stringFromDate:t.dateTaken];
+            currentDate = [dateFormatter stringFromDate:[NSDate date]];
         }
+        if (!self.privateTodaysTests || ![currentDate isEqualToString:testDate])
+            self.privateTodaysTests = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -76,6 +91,30 @@
         self.name = name;
     self.quit = NO;
 
+}
+
+- (NSString *)todaysTestsArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = documentDirectories[0];
+    return [documentDirectory stringByAppendingString:@"todaysTests.archive"];
+}
+
+
+- (BOOL)saveTodaysTests
+{
+    return [NSKeyedArchiver archiveRootObject:self.todaysTests toFile:[self todaysTestsArchivePath]];
+}
+
+- (void)addToTodaysTests:(RIPTest *)test
+{
+    [_privateTodaysTests addObject:test];
+    [_privateTodaysTests sortUsingComparator:^NSComparisonResult(id obj1, id obj2){
+        NSString *first = [(RIPTest *)obj1 name];
+        NSString *second = [(RIPTest *)obj2 name];
+        return [first compare:second];
+    }];
+    [self saveTodaysTests];
 }
 
 - (NSString *)testArchivePath
@@ -648,6 +687,11 @@ NSArray *getDivisionRandy(NSInteger level, NSInteger numQuestions)
 - (NSArray *)testStore
 {
     return self.privateTestStore;
+}
+
+- (NSArray *)todaysTests
+{
+    return self.privateTodaysTests;
 }
 
 @end

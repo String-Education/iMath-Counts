@@ -25,17 +25,46 @@
 
 + (instancetype)generateTest
 {
+    NSString *monthYear;
+    NSString *day;
+    
     //Initializes test and generates an .xls document if Dropbox option is enabled
     RIPTest *t = [[RIPTest alloc] initPrivate];
+    RIPDataManager *sharedManager = [RIPDataManager sharedManager];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"MMMM y"];
+    monthYear = [dateFormatter stringFromDate:t.dateTaken];
+    
+    [dateFormatter setDateFormat:@"EEEE, MMMM d"];
+    day = [dateFormatter stringFromDate:t.dateTaken];
+    
+    DBPath *monthYearPath = [[DBPath alloc] initWithString:monthYear];
+    DBPath *dayPath = [monthYearPath childPath:day];
+    
+    DBPath *testsPath = [dayPath childPath:@"Tests"];
+    
     DBAccount *account = [[DBAccountManager sharedManager] linkedAccount];
     if (account) {
         dispatch_queue_t uploader = dispatch_queue_create("backgroundUploader", NULL);
         dispatch_async(uploader, ^{
+            DBFile *todaysTests;
+            
             [t generateXLS];
-            DBPath *testPath = [[DBPath root] childPath:[t XLSName]];
+            [sharedManager addToTodaysTests:t];
+            [t generateTodaysTests];
+            DBPath *testPath = [testsPath childPath:[t XLSName]];
+            DBPath *todaysTestsPath = [dayPath childPath:[t todaysTestsXLSName]];
             //DBError *error = [[DBError alloc] init];
+            if (!todaysTestsPath)
+                todaysTests = [[DBFilesystem sharedFilesystem] createFile:todaysTestsPath error:nil];
+            else
+                todaysTests = [[DBFilesystem sharedFilesystem] openFile:todaysTestsPath error:nil];
             DBFile *test = [[DBFilesystem sharedFilesystem] createFile:testPath error:nil];
-            [test writeContentsOfFile:[t XLSPath] shouldSteal:YES error:nil];});
+            [todaysTests writeContentsOfFile:[t todaysTestsXLSPath] shouldSteal:YES error:nil];
+            [test writeContentsOfFile:[t XLSPath] shouldSteal:YES error:nil];
+        });
     }
     return t;
 }
@@ -105,26 +134,33 @@
 
 #pragma mark JXLS methods
 
+- (NSString *)todaysTestsXLSName
+{
+    return @"Today's Tests.xls";
+}
+
+- (NSString *)todaysTestsXLSPath
+{
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:[self todaysTestsXLSName]];
+}
+
 - (NSString *)XLSName
 {
     NSDateFormatter *dateFormatter;
     NSString *dateTaken;
     
-    //@"yyyy-MM-dd '@' hh/mm/ss a"
     dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd '@' hh/mm/ss a"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd '@' h-mm-ss a"];
     dateTaken = [dateFormatter stringFromDate:self.dateTaken];
-    return [NSString stringWithFormat:@"%@ %@.xls", self.name, self.dateTaken];
+    if (self.name && ![self.name isEqualToString:@""])
+        return [NSString stringWithFormat:@"%@ %@.xls", self.name, dateTaken];
+    else
+        return [NSString stringWithFormat:@"%@.xls", dateTaken];
 }
 
 - (NSString *)XLSPath
 {
-    
-    NSString *documentName;
-    
-    
-    documentName = [self XLSName];
-    return [NSTemporaryDirectory() stringByAppendingPathComponent:documentName];
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:[self XLSName]];
 }
 
 - (void)formatCell:(JXLSCell *)cell inWorksheet:(JXLSWorkSheet *)sheet atRow:(uint32_t)row column:(uint32_t)column toHeader:(NSString *)name
@@ -137,11 +173,121 @@
     [cell setFontHeight:160];
 }
 
+- (void)generateTodaysTests
+{
+    JXLSCell *cell;
+    NSString *difficulty;
+    double percentCorrect;
+    NSInteger minutes = 0;
+    NSInteger seconds = 0;
+    NSString *totalTime;
+    NSString *timeRemaining;
+    
+    RIPDataManager *sharedManager = [RIPDataManager sharedManager];
+    JXLSWorkBook *workBook = [JXLSWorkBook new];
+    JXLSWorkSheet *workSheet = [workBook workSheetWithName:@"First Sheet"];
+    
+    [workSheet setHeight:500 forRow:0 defaultFormat:NULL];
+    [self formatCell:cell inWorksheet:workSheet atRow:0 column:0 toHeader:@"Name"];
+    [self formatCell:cell inWorksheet:workSheet atRow:0 column:1 toHeader:@"Score"];
+    [self formatCell:cell inWorksheet:workSheet atRow:0 column:2 toHeader:@"Difficulty Level"];
+    [self formatCell:cell inWorksheet:workSheet atRow:0 column:3 toHeader:@"Operation"];
+    [self formatCell:cell inWorksheet:workSheet atRow:0 column:4 toHeader:@"Time Allowed"];
+    [self formatCell:cell inWorksheet:workSheet atRow:0 column:5 toHeader:@"Time Remaining"];
+    [self formatCell:cell inWorksheet:workSheet atRow:0 column:6 toHeader:@"Quit?"];
+    
+    for (uint32_t i = 0; i < sharedManager.todaysTests.count; i++) {
+        RIPTest *t = sharedManager.todaysTests[i];
+        uint32_t idx = i + 1;
+        
+        [workSheet setHeight:500 forRow:idx defaultFormat:NULL];
+        
+        cell = [workSheet setCellAtRow:idx column:0 toString:[NSString stringWithFormat:@"%@", t.name]];
+        [cell setHorizontalAlignment:HALIGN_CENTER];
+        [cell setFontHeight:160];
+        [cell setWraps:YES];
+        
+        percentCorrect = ((double)t.questionsCorrect / (double)t.questionsTotal) * 100.0;
+        cell = [workSheet setCellAtRow:idx column:1 toString:[NSString stringWithFormat:@"%d/%d (%.02f%%)", t.questionsCorrect, t.questionsTotal, percentCorrect]];
+        [cell setHorizontalAlignment:HALIGN_CENTER];
+        [cell setFontHeight:160];
+        [cell setWraps:YES];
+        
+        if ([t.operation isEqualToString:ADDITION] || [t.operation isEqualToString:SUBTRACTION]) {
+            switch (self.difficulty) {
+                case 1: difficulty = @"Easy"; break;
+                case 2: difficulty = @"Medium"; break;
+                case 3: difficulty = @"Hard"; break;
+                case 4: difficulty = @"Expert"; break;
+                default: difficulty = @""; break;
+            }
+        } else {
+            if (t.difficulty == 13)
+                difficulty = @"All";
+            else
+                difficulty = [NSString stringWithFormat:@"%d", t.difficulty];
+        }
+        cell = [workSheet setCellAtRow:idx column:2 toString:difficulty];
+        [cell setHorizontalAlignment:HALIGN_CENTER];
+        [cell setFontHeight:160];
+        [cell setWraps:YES];
+        
+        cell = [workSheet setCellAtRow:idx column:3 toString:t.operation];
+        [cell setHorizontalAlignment:HALIGN_CENTER];
+        [cell setFontHeight:160];
+        [cell setWraps:YES];
+
+        if (t.time == 0) {
+            cell = [workSheet setCellAtRow:idx column:4 toString:@"-"];
+            [cell setHorizontalAlignment:HALIGN_CENTER];
+            [cell setFontHeight:160];
+            [cell setWraps:YES];
+
+            cell = [workSheet setCellAtRow:idx column:5 toString:@"-"];
+            [cell setHorizontalAlignment:HALIGN_CENTER];
+            [cell setFontHeight:160];
+            [cell setWraps:YES];
+        } else {
+            minutes = t.timeRemaining / 60;
+            seconds = t.timeRemaining % 60;
+            timeRemaining = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            minutes = t.time / 60;
+            seconds = t.time % 60;
+            totalTime = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            
+            cell = [workSheet setCellAtRow:idx column:4 toString:totalTime];
+            [cell setHorizontalAlignment:HALIGN_CENTER];
+            [cell setFontHeight:160];
+            [cell setWraps:YES];
+
+            cell = [workSheet setCellAtRow:idx column:5 toString:timeRemaining];
+            [cell setHorizontalAlignment:HALIGN_CENTER];
+            [cell setFontHeight:160];
+            [cell setWraps:YES];
+        }
+        
+        if (t.quit)
+            cell = [workSheet setCellAtRow:idx column:6 toString:@"Yes"];
+        else
+            cell = [workSheet setCellAtRow:idx column:6 toString:@"No"];
+        [cell setHorizontalAlignment:HALIGN_CENTER];
+        [cell setFontHeight:160];
+        [cell setWraps:YES];
+    }
+    
+    int success = [workBook writeToFile:[self todaysTestsXLSPath]];
+    NSLog(@"success = %d", success);
+}
+
 - (void)generateXLS
 {
     JXLSCell *cell;
     NSString *difficulty;
     double percentCorrect;
+    NSInteger minutes = 0;
+    NSInteger seconds = 0;
+    NSString *totalTime;
+    NSString *timeRemaining;
     
     JXLSWorkBook *workBook = [JXLSWorkBook new];
     JXLSWorkSheet *workSheet = [workBook workSheetWithName:@"First Sheet"];
@@ -162,7 +308,7 @@
     [self formatCell:cell inWorksheet:workSheet atRow:0 column:6 toHeader:@"Quit?"];
     
     //Displays entered name
-    cell = [workSheet setCellAtRow:1 column:0 toString:[NSString stringWithFormat:@"%@", self.name]];
+    cell = [workSheet setCellAtRow:1 column:0 toString:self.name];
     [cell setHorizontalAlignment:HALIGN_CENTER];
     [cell setFontHeight:160];
     
@@ -181,12 +327,12 @@
         else
             difficulty = [NSString stringWithFormat:@"%d", self.difficulty];
     }
-    cell = [workSheet setCellAtRow:1 column:1 toString:[NSString stringWithFormat:@"%@", difficulty]];
+    cell = [workSheet setCellAtRow:1 column:1 toString:difficulty];
     [cell setHorizontalAlignment:HALIGN_CENTER];
     [cell setFontHeight:160];
     
     //Displays test operation
-    cell = [workSheet setCellAtRow:1 column:2 toString:[NSString stringWithFormat:@"%@", self.operation]];
+    cell = [workSheet setCellAtRow:1 column:2 toString:self.operation];
     [cell setHorizontalAlignment:HALIGN_CENTER];
     [cell setFontHeight:160];
     
@@ -200,11 +346,17 @@
         [cell setHorizontalAlignment:HALIGN_CENTER];
         [cell setFontHeight:160];
     } else {
-        cell = [workSheet setCellAtRow:1 column:3 toString:[NSString stringWithFormat:@"%d", self.time]];
+        minutes = self.timeRemaining / 60;
+        seconds = self.timeRemaining % 60;
+        timeRemaining = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        minutes = self.time / 60;
+        seconds = self.time % 60;
+        totalTime = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        cell = [workSheet setCellAtRow:1 column:3 toString:totalTime];
         [cell setHorizontalAlignment:HALIGN_CENTER];
         [cell setFontHeight:160];
         
-        cell = [workSheet setCellAtRow:1 column:4 toString:[NSString stringWithFormat:@"%d", self.timeRemaining]];
+        cell = [workSheet setCellAtRow:1 column:4 toString:timeRemaining];
         [cell setHorizontalAlignment:HALIGN_CENTER];
         [cell setFontHeight:160];
     }

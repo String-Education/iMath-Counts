@@ -22,12 +22,15 @@ static NSString *const DIVISION = @"Division";
 - (void)changeSettings:(NSInteger)numQuestions difficulty:(NSInteger)difficulty operation:(NSString *)operation time:(NSInteger)time name:(NSString *)name;
 - (void)generateCards;
 - (BOOL)saveTest;
+- (BOOL)saveTodaysTests;
 - (void)addTest:(RIPTest *)test;
 - (void)removeTest:(RIPTest *)test;
 - (void)removeAllTests;
+- (void)addToTodaysTests:(RIPTest *)test;
 
 @property (readonly, nonatomic) NSArray *testStore;
 @property (readonly, nonatomic) NSArray *cardStore;
+@property (readonly, nonatomic) NSArray *todaysTests;
 @property (copy, nonatomic) NSString *operation;
 @property (nonatomic) NSInteger time;
 @property (nonatomic) NSInteger timeRemaining;
