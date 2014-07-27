@@ -38,11 +38,11 @@
 
 #pragma mark Keyboard methods
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+/*- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
     [self.view endEditing:YES];
-}
+}*/
 
 - (void)doneEditing:(NSNotification *)note
 {
@@ -50,9 +50,15 @@
     if (![self.answerField.text isEqual:@""]) {
         self.displayedCard.isAnswered = YES;
         self.displayedCard.inputAnswer = [self.answerField.text integerValue];
+    } else {
+        self.displayedCard.isAnswered = NO;
+        self.displayedCard.inputAnswer = 0;
+        self.answerField.text = @"";
     }
-    if (self.displayedCard.inputAnswer == self.displayedCard.answer) {
+    if (self.displayedCard.inputAnswer == self.displayedCard.answer && ![self.answerField.text isEqual:@""]) {
         self.displayedCard.isCorrect = YES;
+    } else {
+        self.displayedCard.isCorrect = NO;
     }
     
     //Posts custom notification for callback in RIPTimeTestViewController
@@ -72,6 +78,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     //Loads sharedManager to access its cardStore
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     
@@ -101,11 +108,38 @@
         self.answerField.text = [NSString stringWithFormat:@"%d", self.displayedCard.inputAnswer];
     self.displayedCard.isViewed = YES;
     
+    
+    UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
+
+    if ([sharedManager.operation isEqualToString:ADDITION])
+        keyboardDoneButtonView.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+    else if ([sharedManager.operation isEqualToString:SUBTRACTION])
+        keyboardDoneButtonView.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+    else if ([sharedManager.operation isEqualToString:MULTIPLICATION])
+        keyboardDoneButtonView.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
+    else if ([sharedManager.operation isEqualToString:DIVISION])
+        keyboardDoneButtonView.barTintColor = [UIColor purpleColor];
+    else
+        keyboardDoneButtonView.barTintColor = [UIColor darkGrayColor];
+    
+    [keyboardDoneButtonView sizeToFit];
+    UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                 target:nil
+                                                                                 action:nil];
+    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                   style:UIBarButtonItemStyleBordered
+                                                                  target:self
+                                                                  action:@selector(doneEditing:)];
+    doneItem.tintColor = [UIColor darkTextColor];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:paddingItem, doneItem, paddingItem, nil]];
+    self.answerField.inputAccessoryView = keyboardDoneButtonView;
+    
+    
     //Callback for when keyboard is dismissed
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(doneEditing:)
-                                                 name:UITextFieldTextDidEndEditingNotification
-                                               object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self
+    //                                         selector:@selector(doneEditing:)
+    //                                             name:UITextFieldTextDidEndEditingNotification
+    //                                           object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

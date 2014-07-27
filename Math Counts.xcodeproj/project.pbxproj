@@ -26,6 +26,7 @@
 		C895B5A8197DD0790074AA11 /* RIPCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = C895B5A7197DD0790074AA11 /* RIPCircleView.m */; };
 		C89618B719554F5300A82408 /* RIPCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C89618B519554F5300A82408 /* RIPCardViewController.m */; };
 		C89618B819554F5300A82408 /* RIPCardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C89618B619554F5300A82408 /* RIPCardViewController.xib */; };
+		C898A7501984791D005F6816 /* RIPTimeTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C898A74F1984791D005F6816 /* RIPTimeTestViewController.xib */; };
 		C89D035219539BD4002120F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D035119539BD4002120F2 /* Foundation.framework */; };
 		C89D035419539BD4002120F2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D035319539BD4002120F2 /* CoreGraphics.framework */; };
 		C89D035619539BD4002120F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C89D035519539BD4002120F2 /* UIKit.framework */; };
@@ -106,6 +107,7 @@
 		C89618B419554F5300A82408 /* RIPCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIPCardViewController.h; sourceTree = "<group>"; };
 		C89618B519554F5300A82408 /* RIPCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIPCardViewController.m; sourceTree = "<group>"; };
 		C89618B619554F5300A82408 /* RIPCardViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPCardViewController.xib; sourceTree = "<group>"; };
+		C898A74F1984791D005F6816 /* RIPTimeTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RIPTimeTestViewController.xib; sourceTree = "<group>"; };
 		C89D034E19539BD4002120F2 /* Math Counts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Math Counts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C89D035119539BD4002120F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C89D035319539BD4002120F2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -258,6 +260,7 @@
 				C870CB3D195423EB004BFA51 /* RIPTestConfigViewController.xib */,
 				C89D03911953B626002120F2 /* RIPTimeTestViewController.h */,
 				C89D03921953B626002120F2 /* RIPTimeTestViewController.m */,
+				C898A74F1984791D005F6816 /* RIPTimeTestViewController.xib */,
 				C89618B419554F5300A82408 /* RIPCardViewController.h */,
 				C89618B519554F5300A82408 /* RIPCardViewController.m */,
 				C89618B619554F5300A82408 /* RIPCardViewController.xib */,
@@ -391,6 +394,7 @@
 				C870CB3F195423EB004BFA51 /* RIPTestConfigViewController.xib in Resources */,
 				C89D036419539BD4002120F2 /* Images.xcassets in Resources */,
 				C870CB3A19540E72004BFA51 /* RIPMainMenuViewController.xib in Resources */,
+				C898A7501984791D005F6816 /* RIPTimeTestViewController.xib in Resources */,
 				C8CFD31A19636C9B0080DC8E /* RIPHistoryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

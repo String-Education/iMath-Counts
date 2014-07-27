@@ -273,6 +273,8 @@
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:nil];
+    CGRect viewBounds = [[self view] bounds];
+    CGRect pageControllerBounds = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, (viewBounds.size.height / 2.0));
     self.pageController.dataSource = self;
     self.pageController.delegate = self;
     self.pageController.automaticallyAdjustsScrollViewInsets = NO;
@@ -281,7 +283,7 @@
                                   direction:UIPageViewControllerNavigationDirectionForward
                                    animated:NO
                                  completion:nil];
-    [[self.pageController view] setFrame:[[self view] bounds]];
+    [[self.pageController view] setFrame:pageControllerBounds];
     [self addChildViewController:self.pageController];
     [[self view] addSubview:[self.pageController view]];
     [self.pageController didMoveToParentViewController:self];
