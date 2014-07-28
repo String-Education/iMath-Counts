@@ -13,6 +13,7 @@
 
 - (instancetype)initWithCardIndex:(NSInteger)index;
 
+@property (weak, nonatomic) IBOutlet UITextField *answerField;
 @property (weak, nonatomic) RIPCard *displayedCard;
 @property (nonatomic) NSInteger cardIndex;
 

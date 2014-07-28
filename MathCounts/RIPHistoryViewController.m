@@ -233,13 +233,13 @@
     //Displays operation
     if ([t.operation isEqualToString:ADDITION]) {
         cell.operationLabel.text = @"+";
-        cell.operationLabel.textColor = [UIColor redColor];
+        cell.operationLabel.textColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
     } else if ([t.operation isEqualToString:SUBTRACTION]) {
         cell.operationLabel.text = @"-";
-        cell.operationLabel.textColor = [UIColor blueColor];
+        cell.operationLabel.textColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
     } else if ([t.operation isEqualToString:MULTIPLICATION]) {
         cell.operationLabel.text = @"x";
-        cell.operationLabel.textColor = [UIColor greenColor];
+        cell.operationLabel.textColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
     } else if ([t.operation isEqualToString:DIVISION]) {
         cell.operationLabel.text = @"÷";
         cell.operationLabel.textColor = [UIColor purpleColor];

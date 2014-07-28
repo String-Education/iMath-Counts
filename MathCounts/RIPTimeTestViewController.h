@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RIPNumberPadView.h"
 
 @interface RIPTimeTestViewController : UIViewController
+
+@property (strong, nonatomic) RIPNumberPadView *keyboard;
 
 @end

@@ -93,6 +93,16 @@
 
 }
 
+- (void)clearSettings
+{
+    self.operation = nil;
+    self.numQuestions = 0;
+    self.difficulty = 0;
+    self.time = 0;
+    self.name = nil;
+    self.quit = NO;
+}
+
 - (NSString *)todaysTestsArchivePath
 {
     NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

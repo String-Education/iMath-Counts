@@ -20,6 +20,7 @@ static NSString *const DIVISION = @"Division";
 + (instancetype)sharedManager;
 
 - (void)changeSettings:(NSInteger)numQuestions difficulty:(NSInteger)difficulty operation:(NSString *)operation time:(NSInteger)time name:(NSString *)name;
+- (void)clearSettings;
 - (void)generateCards;
 - (BOOL)saveTest;
 - (BOOL)saveTodaysTests;

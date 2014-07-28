@@ -219,7 +219,7 @@
             DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:linkedAccount];
             [DBFilesystem setSharedFilesystem:filesystem];
         } else {
-            if ([DBFilesystem sharedFilesystem])
+//            if ([DBFilesystem sharedFilesystem])
                 [[DBFilesystem sharedFilesystem] shutDown];
         }
     }];

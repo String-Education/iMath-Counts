@@ -47,9 +47,12 @@
 
 #pragma mark UITextField methods
 
+#define ALPHA_NUMERIC @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"
+
 - (BOOL)textField:(UITextField *)field shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)characters
 {
-    NSCharacterSet *charactersToBlock = [[NSCharacterSet alphanumericCharacterSet] invertedSet];
+
+    NSCharacterSet *charactersToBlock = [[NSCharacterSet characterSetWithCharactersInString:ALPHA_NUMERIC] invertedSet];
     return ([characters rangeOfCharacterFromSet:charactersToBlock].location == NSNotFound);
 }
 

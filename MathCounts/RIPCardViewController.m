@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *firstNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondNumLabel;
 @property (weak, nonatomic) IBOutlet UILabel *operationLabel;
-@property (weak, nonatomic) IBOutlet UITextField *answerField;
 
 @end
 
@@ -31,18 +30,13 @@
 - (instancetype)initWithCardIndex:(NSInteger)index
 {
     self = [super init];
-    if (self)
+    if (self) {
         self.cardIndex = index;
+    }
     return self;
 }
 
 #pragma mark Keyboard methods
-
-/*- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [super touchesBegan:touches withEvent:event];
-    [self.view endEditing:YES];
-}*/
 
 - (void)doneEditing:(NSNotification *)note
 {
@@ -73,6 +67,19 @@
     //Caps text field length to 3 characters
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     return (newLength > 3) ? NO : YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    //No clue why this works but using dispatch_queue
+    //lets the view retain its firstResponder status
+    __weak RIPCardViewController *weakSelf = self;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        RIPCardViewController *strongSelf = weakSelf;
+        [strongSelf.answerField becomeFirstResponder];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,42 +116,36 @@
     self.displayedCard.isViewed = YES;
     
     
-    UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
-
-    if ([sharedManager.operation isEqualToString:ADDITION])
-        keyboardDoneButtonView.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
-    else if ([sharedManager.operation isEqualToString:SUBTRACTION])
-        keyboardDoneButtonView.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
-    else if ([sharedManager.operation isEqualToString:MULTIPLICATION])
-        keyboardDoneButtonView.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
-    else if ([sharedManager.operation isEqualToString:DIVISION])
-        keyboardDoneButtonView.barTintColor = [UIColor purpleColor];
-    else
-        keyboardDoneButtonView.barTintColor = [UIColor darkGrayColor];
-    
-    [keyboardDoneButtonView sizeToFit];
-    UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                                 target:nil
-                                                                                 action:nil];
-    UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                   style:UIBarButtonItemStyleBordered
-                                                                  target:self
-                                                                  action:@selector(doneEditing:)];
-    doneItem.tintColor = [UIColor darkTextColor];
-    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:paddingItem, doneItem, paddingItem, nil]];
-    self.answerField.inputAccessoryView = keyboardDoneButtonView;
+    RIPTimeTestViewController *testController = (RIPTimeTestViewController *)self.parentViewController.parentViewController;
+    self.answerField.inputView = [[UIView alloc] initWithFrame:CGRectZero];
+    testController.keyboard.target = self.answerField;
     
     
     //Callback for when keyboard is dismissed
-    //[[NSNotificationCenter defaultCenter] addObserver:self
-    //                                         selector:@selector(doneEditing:)
-    //                                             name:UITextFieldTextDidEndEditingNotification
-    //                                           object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(doneEditing:)
+                                                 name:@"doneClicked"
+                                               object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    
+    if (![self.answerField.text isEqual:@""]) {
+        self.displayedCard.isAnswered = YES;
+        self.displayedCard.inputAnswer = [self.answerField.text integerValue];
+    } else {
+        self.displayedCard.isAnswered = NO;
+        self.displayedCard.inputAnswer = 0;
+        self.answerField.text = @"";
+    }
+    if (self.displayedCard.inputAnswer == self.displayedCard.answer && ![self.answerField.text isEqual:@""]) {
+        self.displayedCard.isCorrect = YES;
+    } else {
+        self.displayedCard.isCorrect = NO;
+    }
+    [self.answerField resignFirstResponder];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

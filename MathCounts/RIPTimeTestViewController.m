@@ -12,7 +12,7 @@
 #import "RIPResultsViewController.h"
 
 @interface RIPTimeTestViewController ()
-<UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate>
+<UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
 @property (copy, nonatomic) NSString *timerLabel;
 @property (strong, nonatomic) UIPageViewController *pageController;
@@ -99,49 +99,39 @@
     }
     //If a card is found, creates a view controller with it and displays it
     if (unansweredCardFound) {
-        cardViewToDisplay = [[RIPCardViewController alloc] initWithCardIndex:index];
+        cardViewToDisplay = [[RIPCardViewController alloc] initWithCardIndex:index];        
         if (index > pos) {
-            if ((index - pos) > 1) {
-                [self.pageController setViewControllers:@[cardViewToDisplay]
-                                              direction:UIPageViewControllerNavigationDirectionForward
-                                               animated:YES
-                                             completion:^(BOOL finished) {
-                                                 UIPageViewController* pvcs = pageController;
-                                                 if (!pvcs) return;
-                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                     [pvcs setViewControllers:@[cardViewToDisplay]
-                                                                    direction:UIPageViewControllerNavigationDirectionForward
-                                                                     animated:NO
-                                                                   completion:nil];
-                                                 });
-                                             }];
-            } else {
-                [self.pageController setViewControllers:@[cardViewToDisplay]
-                                              direction:UIPageViewControllerNavigationDirectionForward
-                                               animated:YES
-                                             completion:nil];
-            }
+            [self.pageController setViewControllers:@[cardViewToDisplay]
+                                          direction:UIPageViewControllerNavigationDirectionForward
+                                           animated:YES
+                                         completion:^(BOOL finished){
+                                             UIPageViewController* pvcs = pageController;
+                                             if (!pvcs) return;
+                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                 [pvcs setViewControllers:@[cardViewToDisplay]
+                                                                direction:UIPageViewControllerNavigationDirectionForward
+                                                                 animated:NO
+                                                               completion:^(BOOL finished){
+                                                                   [cardViewToDisplay.answerField becomeFirstResponder];
+                                                               }];
+                                             });
+                                         }];
         } else if (index < pos) {
-            if ((pos - index) > 1) {
-                [self.pageController setViewControllers:@[cardViewToDisplay]
-                                              direction:UIPageViewControllerNavigationDirectionReverse
-                                               animated:YES
-                                             completion:^(BOOL finished) {
-                                                 UIPageViewController* pvcs = pageController;
-                                                 if (!pvcs) return;
-                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                     [pvcs setViewControllers:@[cardViewToDisplay]
-                                                                    direction:UIPageViewControllerNavigationDirectionReverse
-                                                                     animated:NO
-                                                                   completion:nil];
-                                                 });
-                                             }];
-            } else {
-                [self.pageController setViewControllers:@[cardViewToDisplay]
-                                              direction:UIPageViewControllerNavigationDirectionReverse
-                                               animated:YES
-                                             completion:nil];
-            }
+            [self.pageController setViewControllers:@[cardViewToDisplay]
+                                          direction:UIPageViewControllerNavigationDirectionReverse
+                                           animated:YES
+                                         completion:^(BOOL finished){
+                                             UIPageViewController* pvcs = pageController;
+                                             if (!pvcs) return;
+                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                 [pvcs setViewControllers:@[cardViewToDisplay]
+                                                                direction:UIPageViewControllerNavigationDirectionReverse
+                                                                 animated:NO
+                                                               completion:^(BOOL finished){
+                                                                   [cardViewToDisplay.answerField becomeFirstResponder];
+                                                               }];
+                                             });
+                                         }];
         }
         if (index == [sharedManager.cardStore indexOfObject:[sharedManager.cardStore lastObject]]) {
             [self.submitItem setEnabled:YES];
@@ -164,11 +154,13 @@
 {
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     if (buttonIndex == alertView.firstOtherButtonIndex) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
         sharedManager.quit = YES;
         //Generates .xls if Dropbox option is enabled
         //Consider different way of doing this
         RIPTest *t = [RIPTest generateTest];
+        [sharedManager clearSettings];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"resultsShown" object:self];
     }
     [alertView dismissWithClickedButtonIndex:buttonIndex animated:YES];
 }
@@ -216,19 +208,24 @@
 
 #pragma mark View methods
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    [super viewWillAppear:animated];
+    [super viewDidLoad];
     
     NSInteger time;
     NSInteger minutes;
     NSInteger seconds;
     UIBarButtonItem *returnItem;
-    NSArray *viewControllers;
     RIPCardViewController *initialViewController;
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     
     [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
+    
+    CGRect viewBounds = [[self view] bounds];
+    
+    CGRect testBounds = CGRectMake(viewBounds.origin.x, ((4.0 * viewBounds.size.height) / 7.0), viewBounds.size.width, ((3.0 * viewBounds.size.height) / 7.0));
+    self.keyboard = [[RIPNumberPadView alloc] initWithFrame:testBounds];
+    [[self view] addSubview:self.keyboard];
     
     //Creates and displays the timer with an initial time
     time = sharedManager.time;
@@ -258,7 +255,6 @@
     
     //Gets first cardViewController and puts it in an array
     initialViewController = [self viewControllerAtIndex:0];
-    viewControllers = [NSArray arrayWithObject:initialViewController];
     
     //Disables navigation via gestures
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
@@ -273,20 +269,22 @@
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:nil];
-    CGRect viewBounds = [[self view] bounds];
-    CGRect pageControllerBounds = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, (viewBounds.size.height / 2.0));
+    CGRect pageControllerBounds = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, ((4.0 * viewBounds.size.height) / 7.0));
     self.pageController.dataSource = self;
     self.pageController.delegate = self;
     self.pageController.automaticallyAdjustsScrollViewInsets = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self.pageController setViewControllers:viewControllers
-                                  direction:UIPageViewControllerNavigationDirectionForward
-                                   animated:NO
-                                 completion:nil];
     [[self.pageController view] setFrame:pageControllerBounds];
     [self addChildViewController:self.pageController];
     [[self view] addSubview:[self.pageController view]];
     [self.pageController didMoveToParentViewController:self];
+    
+    [self.pageController setViewControllers:@[initialViewController]
+                                  direction:UIPageViewControllerNavigationDirectionForward
+                                   animated:NO
+                                 completion:^(BOOL finished) {
+                                     [initialViewController.answerField becomeFirstResponder];
+                                 }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

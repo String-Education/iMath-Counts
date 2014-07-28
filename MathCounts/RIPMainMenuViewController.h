@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RIPOperationButton.h"
 
 @interface RIPMainMenuViewController : UIViewController
+
+@property (strong, nonatomic) RIPOperationButton *addButton;
+@property (strong, nonatomic) RIPOperationButton *subtractButton;
+@property (strong, nonatomic) RIPOperationButton *multiplyButton;
+@property (strong, nonatomic) RIPOperationButton *divideButton;
 
 @end

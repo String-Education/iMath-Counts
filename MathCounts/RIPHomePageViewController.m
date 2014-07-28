@@ -64,13 +64,52 @@
     }
 }
 
+
+
 - (void)goHome:(id)sender
 {
     //Returns to operation selection
+    __weak RIPHomePageViewController *weakSelf = self;
+    if ([sender isKindOfClass:[NSNotification class]]) {
+        self.operationChosen = NO;
+        for (UIScrollView *view in self.pageController.view.subviews) {
+            
+            if ([view isKindOfClass:[UIScrollView class]]) {
+                
+                view.scrollEnabled = NO;
+            }
+        }
+    }
+
+    
     [self.pageController setViewControllers:@[self.mvc]
                                   direction:UIPageViewControllerNavigationDirectionReverse
                                    animated:YES
-                                 completion:nil];
+                                 completion:^(BOOL finished){
+                                     
+                                     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
+                                     RIPHomePageViewController *strongSelf = weakSelf;
+                                     [strongSelf.mvc.view setNeedsDisplay];
+                                     if ([sharedManager.operation isEqualToString:ADDITION]) {
+                                         strongSelf.settingsBar.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+                                         [strongSelf.mvc.addButton.button setSelected:YES];
+                                     } else if ([sharedManager.operation isEqualToString:SUBTRACTION]) {
+                                         strongSelf.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+                                         [strongSelf.mvc.subtractButton.button setSelected:YES];
+                                     } else if ([sharedManager.operation isEqualToString:MULTIPLICATION]) {
+                                         strongSelf.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
+                                         [strongSelf.mvc.multiplyButton.button setSelected:YES];
+                                     } else if ([sharedManager.operation isEqualToString:DIVISION]) {
+                                         strongSelf.settingsBar.barTintColor = [UIColor purpleColor];
+                                         [strongSelf.mvc.divideButton.button setSelected:YES];
+                                     } else {
+                                         strongSelf.settingsBar.barTintColor = [UIColor darkGrayColor];
+                                     }
+                                     if (sharedManager.operation)
+                                         strongSelf.navigationItem.title = sharedManager.operation;
+                                     else
+                                         strongSelf.navigationItem.title = @"Math Counts";
+                                 }];
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
 }
@@ -82,7 +121,7 @@
                                                      style:UIBarButtonItemStyleDone
                                                     target:self
                                                     action:@selector(goHome:)];
-    
+ 
     self.navigationItem.leftBarButtonItem = self.backItem;
     self.navigationItem.rightBarButtonItem = self.tvc.startItem;
 }
@@ -116,6 +155,8 @@
         self.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:DIVISION])
         self.settingsBar.barTintColor = [UIColor purpleColor];
+    else
+        self.settingsBar.barTintColor = [UIColor darkGrayColor];
     
     //Indicates an operation has been chosen and allows scrolling
     self.operationChosen = YES;
@@ -303,6 +344,8 @@
                                              selector:@selector(startTest:)
                                                  name:@"startTest"
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goHome:) name:@"resultsShown" object:nil];
 }
 
 - (void)dealloc

@@ -12,7 +12,6 @@
 #import "RIPHistoryViewController.h"
 #import "RIPSettingsViewController.h"
 #import "RIPSettingsManager.h"
-#import "RIPOperationButton.h"
 
 @interface RIPMainMenuViewController ()
 <UIAlertViewDelegate>
@@ -21,11 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIView *subtractRect;
 @property (weak, nonatomic) IBOutlet UIView *multiplyRect;
 @property (weak, nonatomic) IBOutlet UIView *divideRect;
-
-@property (strong, nonatomic) RIPOperationButton *addButton;
-@property (strong, nonatomic) RIPOperationButton *subtractButton;
-@property (strong, nonatomic) RIPOperationButton *multiplyButton;
-@property (strong, nonatomic) RIPOperationButton *divideButton;
 
 @end
 
@@ -73,9 +67,39 @@
     self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    RIPDataManager *sharedManager = [RIPDataManager sharedManager];
+    
+    if ([sharedManager.operation isEqualToString:ADDITION]) {
+        [self.addButton.button setSelected:YES];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+    } else if ([sharedManager.operation isEqualToString:SUBTRACTION]) {
+        [self.subtractButton.button setSelected:YES];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+    } else if ([sharedManager.operation isEqualToString:MULTIPLICATION]) {
+        [self.multiplyButton.button setSelected:YES];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
+    } else if ([sharedManager.operation isEqualToString:DIVISION]) {
+        [self.divideButton.button setSelected:YES];
+        self.navigationController.navigationBar.barTintColor = [UIColor purpleColor];
+    } else {
+        self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+        [self.addButton.button setSelected:NO];
+        [self.subtractButton.button setSelected:NO];
+        [self.multiplyButton.button setSelected:NO];
+        [self.divideButton.button setSelected:NO];
+
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     
     [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
     
@@ -92,6 +116,22 @@
     [self.view addSubview:self.subtractButton];
     [self.view addSubview:self.multiplyButton];
     [self.view addSubview:self.divideButton];
+    
+    if ([sharedManager.operation isEqualToString:ADDITION]) {
+        [self.addButton.button setSelected:YES];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+    } else if ([sharedManager.operation isEqualToString:SUBTRACTION]) {
+        [self.subtractButton.button setSelected:YES];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+    } else if ([sharedManager.operation isEqualToString:MULTIPLICATION]) {
+        [self.multiplyButton.button setSelected:YES];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
+    } else if ([sharedManager.operation isEqualToString:DIVISION]) {
+        [self.divideButton.button setSelected:YES];
+        self.navigationController.navigationBar.barTintColor = [UIColor purpleColor];
+    } else {
+        self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+    }
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor darkGrayColor]];
     

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *questionsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *difficultyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *difficultyTitle;
 @property (weak, nonatomic) IBOutlet UITableView *cardTableView;
 @property (nonatomic) BOOL isNewTest;
 
@@ -51,9 +52,11 @@
 
 #pragma mark Callbacks
 
-- (IBAction)returnToMainMenu:(id)sender
+- (void)returnToMainMenu:(id)sender
 {
+    [[RIPDataManager sharedManager] clearSettings];
     [self.navigationController popToRootViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"resultsShown" object:self];
 }
 
 #pragma mark UITableView methods
@@ -178,6 +181,7 @@
     
         //Displays the difficulty/divisor/multiplier
         if ([sharedManager.operation isEqualToString:ADDITION] || [sharedManager.operation isEqualToString:SUBTRACTION]) {
+            self.difficultyTitle.text = @"Difficulty";
             switch (sharedManager.difficulty) {
                 case 1: self.difficultyLabel.text = [NSString stringWithFormat:@"Easy"]; break;
                 case 2: self.difficultyLabel.text = [NSString stringWithFormat:@"Medium"]; break;
@@ -186,6 +190,10 @@
                 default: break;
             }
         } else {
+            if ([sharedManager.operation isEqualToString:MULTIPLICATION])
+                self.difficultyTitle.text = @"Multiplier";
+            else
+                self.difficultyTitle.text = @"Divisor";
             if (sharedManager.difficulty == 13)
                 self.difficultyLabel.text = [NSString stringWithFormat:@"All"];
             else
@@ -193,7 +201,10 @@
         }
         
         //If the test is new, sets custom home button and adds the test to the testStore
-        homeItem = [[UIBarButtonItem alloc] initWithTitle:@"Home" style:UIBarButtonItemStyleDone target:self action:@selector(returnToMainMenu:)];
+        homeItem = [[UIBarButtonItem alloc] initWithTitle:@"Home"
+                                                    style:UIBarButtonItemStyleDone
+                                                   target:self
+                                                   action:@selector(returnToMainMenu:)];
         self.navigationItem.leftBarButtonItem = homeItem;
         RIPTest *test = [RIPTest generateTest];
         [[RIPDataManager sharedManager] addTest:test];
@@ -222,6 +233,7 @@
         }
         
         if ([self.selectedTest.operation isEqualToString:ADDITION] || [self.selectedTest.operation isEqualToString:SUBTRACTION]) {
+            self.difficultyTitle.text = @"Difficulty";
             switch (self.selectedTest.difficulty) {
                 case 1: self.difficultyLabel.text = [NSString stringWithFormat:@"Easy"]; break;
                 case 2: self.difficultyLabel.text = [NSString stringWithFormat:@"Medium"]; break;
@@ -230,6 +242,10 @@
                 default: break;
             }
         } else {
+            if ([self.selectedTest.operation isEqualToString:MULTIPLICATION])
+                self.difficultyTitle.text = @"Multiplier";
+            else
+                self.difficultyTitle.text = @"Divisor";
             if (self.selectedTest.difficulty == 13)
                 self.difficultyLabel.text = [NSString stringWithFormat:@"All"];
             else
