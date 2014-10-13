@@ -7,22 +7,25 @@
 //
 
 #import "RIPHomePageViewController.h"
-#import "RIPMainMenuViewController.h"
-#import "RIPTestConfigViewController.h"
 #import "RIPSettingsViewController.h"
 #import "RIPHistoryViewController.h"
 #import "RIPTimeTestViewController.h"
+#import "RIPMainMenuViewController.h"
+#import "RIPTestConfigViewController.h"
 #import "RIPDataManager.h"
 #import "RIPSettingsManager.h"
 
 @interface RIPHomePageViewController ()
-<UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, UIToolbarDelegate>
+<UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIAlertViewDelegate, UIToolbarDelegate, UIPopoverControllerDelegate>
 
+
+@property (strong, nonatomic) UIBarButtonItem *backItem;
+@property (strong, nonatomic) UIToolbar *settingsBar;
+@property (strong, nonatomic) UIPopoverController *historyPopover;
+@property (strong, nonatomic) UIPopoverController *settingsPopover;
+@property (strong, nonatomic) UIPageViewController *pageController;
 @property (strong, nonatomic) RIPMainMenuViewController *mvc;
 @property (strong, nonatomic) RIPTestConfigViewController *tvc;
-@property (strong, nonatomic) UIBarButtonItem *backItem;
-@property (strong, nonatomic) UIPageViewController *pageController;
-@property (strong, nonatomic) UIToolbar *settingsBar;
 @property (nonatomic) BOOL operationChosen;
 
 @end
@@ -36,10 +39,23 @@
 - (void)showHistory:(id)sender
 {
     //Displays history in a navigation controller
+
     RIPHistoryViewController *history = [[RIPHistoryViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:history];
     navController.modalPresentationStyle = UIModalPresentationFullScreen;
-    [self presentViewController:navController animated:YES completion:nil];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        navController.navigationBar.barStyle = UIBarStyleBlack;
+        navController.navigationBar.translucent = YES;
+        if (self.settingsPopover != nil)
+            [self.settingsPopover dismissPopoverAnimated:YES];
+        self.historyPopover = [[UIPopoverController alloc] initWithContentViewController:navController];
+        self.historyPopover.delegate = self;
+        [self.historyPopover presentPopoverFromBarButtonItem:sender
+                     permittedArrowDirections:UIPopoverArrowDirectionAny
+                                     animated:YES];
+        
+    } else
+        [self presentViewController:navController animated:YES completion:nil];
 }
 
 - (void)showSettings:(id)sender
@@ -60,7 +76,18 @@
         RIPSettingsViewController *settings = [[RIPSettingsViewController alloc] init];
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settings];
         navController.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self presentViewController:navController animated:YES completion:nil];
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            navController.navigationBar.barStyle = UIBarStyleBlack;
+            navController.navigationBar.translucent = YES;
+            if (self.historyPopover != nil)
+                [self.historyPopover dismissPopoverAnimated:YES];
+            self.settingsPopover = [[UIPopoverController alloc] initWithContentViewController:navController];
+            self.settingsPopover.delegate = self;
+            [self.settingsPopover presentPopoverFromBarButtonItem:sender
+                             permittedArrowDirections:UIPopoverArrowDirectionAny
+                                             animated:YES];
+        } else
+            [self presentViewController:navController animated:YES completion:nil];
     }
 }
 
@@ -132,6 +159,14 @@
     self.navigationItem.leftBarButtonItem = nil;
 }
 
+- (void)dismissPopover:(NSNotification *)note
+{
+    if ([note.object isKindOfClass:[RIPHistoryViewController class]])
+        [self.historyPopover dismissPopoverAnimated:YES];
+    else
+        [self.settingsPopover dismissPopoverAnimated:YES];
+}
+
 - (void)startTest:(NSNotification *)note
 {
     //Starts test from HomePageViewController in order to present via navigationController
@@ -139,9 +174,15 @@
     [self.navigationController pushViewController:testViewController animated:YES];
 }
 
-- (void)setOperationTitle:(NSNotification *)note
+- (void)delayedSetOperation:(NSNotification *)note
+{
+    [self performSelector:@selector(setOperationTitle:) withObject:nil afterDelay:0.25];
+}
+
+- (void)setOperationTitle:(id)sender
 {
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
+    __weak RIPHomePageViewController *weakSelf = self;
     
     //Sets title to selected operation
     self.navigationItem.title = [NSString stringWithFormat:@"%@", [RIPDataManager sharedManager].operation];
@@ -169,10 +210,23 @@
     }
     //Refreshes UIPageViewController and TestConfigViewController
     self.tvc = [[RIPTestConfigViewController alloc] init];
-    [self.pageController setViewControllers:@[self.mvc]
-                             direction:UIPageViewControllerNavigationDirectionForward
-                              animated:NO
-                            completion:nil];
+    [self.pageController setViewControllers:@[self.tvc]
+                                  direction:UIPageViewControllerNavigationDirectionForward
+                                   animated:YES
+                                 completion:^(BOOL finished){
+                                     RIPHomePageViewController *strongSelf = weakSelf;
+                                     if (strongSelf.pageController.viewControllers[0] == strongSelf.tvc) {
+                                         strongSelf.backItem = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                                          style:UIBarButtonItemStyleDone
+                                                                                         target:strongSelf
+                                                                                         action:@selector(goHome:)];
+                                         strongSelf.navigationItem.leftBarButtonItem = strongSelf.backItem;
+                                         strongSelf.navigationItem.rightBarButtonItem = strongSelf.tvc.startItem;
+                                     } else {
+                                         strongSelf.navigationItem.leftBarButtonItem = nil;
+                                         strongSelf.navigationItem.rightBarButtonItem = nil;
+                                     }
+                                 }];
 }
 
 - (void)setDefaultTitle:(NSNotification *)note
@@ -196,6 +250,14 @@
                                  completion:nil];
 }
 
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    if ([popoverController isEqual:self.settingsPopover])
+        self.settingsPopover = nil;
+    else
+        self.historyPopover = nil;
+}
+
 #pragma mark UIAlertView methods
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -212,7 +274,18 @@
             RIPSettingsViewController *settings = [[RIPSettingsViewController alloc] init];
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settings];
             navController.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:navController animated:YES completion:nil];
+            if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+                navController.navigationBar.barStyle = UIBarStyleBlack;
+                navController.navigationBar.translucent = YES;
+                if (self.historyPopover != nil)
+                    [self.historyPopover dismissPopoverAnimated:YES];
+                self.settingsPopover = [[UIPopoverController alloc] initWithContentViewController:navController];
+                self.settingsPopover.delegate = self;
+                [self.settingsPopover presentPopoverFromBarButtonItem:self.settingsBar.items[3]
+                                 permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                 animated:YES];
+            } else
+                [self presentViewController:navController animated:YES completion:nil];
         } else {
             UIAlertView *incorrectPassword = [[UIAlertView alloc] initWithTitle:@"Incorrect Password"
                                                                         message:nil
@@ -331,7 +404,7 @@
     
     //Notifications posted by OperationButtons when enabled/disabled
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(setOperationTitle:)
+                                             selector:@selector(delayedSetOperation:)
                                                  name:@"buttonEnabled"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -345,7 +418,14 @@
                                                  name:@"startTest"
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goHome:) name:@"resultsShown" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(goHome:)
+                                                 name:@"resultsShown"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(dismissPopover:) name:@"dismissPopover"
+                                               object:nil];
 }
 
 - (void)dealloc

@@ -53,7 +53,10 @@
 
 - (void)dismissHistory:(id)sender
 {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissPopover" object:self];
+    else
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)deleteOneTest
@@ -228,7 +231,7 @@
         cell.nameLabel.text = t.name;
     
     //Displays questions correct out of questions total
-    cell.scoreLabel.text = [NSString stringWithFormat:@"%d/%d", t.questionsCorrect, t.questionsTotal];
+    cell.scoreLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)t.questionsCorrect, (long)t.questionsTotal];
     
     //Displays operation
     if ([t.operation isEqualToString:ADDITION]) {

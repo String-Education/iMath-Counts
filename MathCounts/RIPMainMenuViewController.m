@@ -12,6 +12,7 @@
 #import "RIPHistoryViewController.h"
 #import "RIPSettingsViewController.h"
 #import "RIPSettingsManager.h"
+#import "RIPHomePageViewController.h"
 
 @interface RIPMainMenuViewController ()
 <UIAlertViewDelegate>
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *subtractRect;
 @property (weak, nonatomic) IBOutlet UIView *multiplyRect;
 @property (weak, nonatomic) IBOutlet UIView *divideRect;
+@property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
 
 @end
 
@@ -87,12 +89,25 @@
         self.navigationController.navigationBar.barTintColor = [UIColor purpleColor];
     } else {
         self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
+        self.instructionLabel.text = @"Tap a Symbol";
         [self.addButton.button setSelected:NO];
         [self.subtractButton.button setSelected:NO];
         [self.multiplyButton.button setSelected:NO];
         [self.divideButton.button setSelected:NO];
 
     }
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [self.addButton setFrame:self.addRect.frame];
+    [self.subtractButton setFrame:self.subtractRect.frame];
+    [self.multiplyButton setFrame:self.multiplyRect.frame];
+    [self.divideButton setFrame:self.divideRect.frame];
+    
+    [self.view layoutSubviews];
 }
 
 - (void)viewDidLoad
@@ -132,6 +147,9 @@
     } else {
         self.navigationController.navigationBar.barTintColor = [UIColor darkGrayColor];
     }
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        self.instructionLabel.font = [UIFont systemFontOfSize:32];
+    self.instructionLabel.text = @"Tap a symbol";
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor darkGrayColor]];
     

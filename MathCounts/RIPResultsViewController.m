@@ -89,7 +89,7 @@
     
     //Displays question number
     questionNumber = indexPath.row + 1;
-    cell.questionNumberLabel.text = [NSString stringWithFormat:@"%d", questionNumber];
+    cell.questionNumberLabel.text = [NSString stringWithFormat:@"%ld", (long)questionNumber];
     
     //Displays the card's question
     firstNum = card.firstNum;
@@ -114,11 +114,11 @@
         else if ([self.selectedTest.operation isEqualToString:DIVISION])
             operation = @"÷";
     }
-    cell.questionDetailLabel.text = [NSString stringWithFormat:@"%d %@ %d =", firstNum, operation, secondNum];
+    cell.questionDetailLabel.text = [NSString stringWithFormat:@"%ld %@ %ld =", (long)firstNum, operation, (long)secondNum];
     
     //Displays the input answer if one was entered
     if (inputAnswer)
-        cell.questionAnswerLabel.text = [NSString stringWithFormat:@"%d", inputAnswer];
+        cell.questionAnswerLabel.text = [NSString stringWithFormat:@"%ld", (long)inputAnswer];
     else
         cell.questionAnswerLabel.text = [NSString stringWithFormat:@""];
     
@@ -126,7 +126,7 @@
     if (!card.isCorrect) {
         cell.questionCorrectLabel.text = @"x";
         cell.questionCorrectLabel.textColor = [UIColor redColor];
-        cell.correctAnswerLabel.text = [NSString stringWithFormat:@"(%d)", card.answer];
+        cell.correctAnswerLabel.text = [NSString stringWithFormat:@"(%ld)", (long)card.answer];
     } else {
         cell.questionCorrectLabel.text = @"✓";
         cell.questionCorrectLabel.textColor = [UIColor greenColor];
@@ -170,10 +170,10 @@
         if (sharedManager.time != 0) {
             minutes = sharedManager.timeRemaining / 60;
             seconds = sharedManager.timeRemaining % 60;
-            timeRemaining = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            timeRemaining = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
             minutes = sharedManager.time / 60;
             seconds = sharedManager.time % 60;
-            totalTime = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            totalTime = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
             self.timeLabel.text = [NSString stringWithFormat:@"%@/%@", timeRemaining, totalTime];
         } else {
             self.timeLabel.text = [NSString stringWithFormat:@"Off"];
@@ -197,7 +197,7 @@
             if (sharedManager.difficulty == 13)
                 self.difficultyLabel.text = [NSString stringWithFormat:@"All"];
             else
-                self.difficultyLabel.text = [NSString stringWithFormat:@"%d", sharedManager.difficulty];
+                self.difficultyLabel.text = [NSString stringWithFormat:@"%ld", (long)sharedManager.difficulty];
         }
         
         //If the test is new, sets custom home button and adds the test to the testStore
@@ -223,10 +223,10 @@
         if (self.selectedTest.time != 0) {
             minutes = self.selectedTest.timeRemaining / 60;
             seconds = self.selectedTest.timeRemaining % 60;
-            timeRemaining = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            timeRemaining = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
             minutes = self.selectedTest.time / 60;
             seconds = self.selectedTest.time % 60;
-            totalTime = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            totalTime = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
             self.timeLabel.text = [NSString stringWithFormat:@"%@/%@", timeRemaining, totalTime];
         } else {
             self.timeLabel.text = [NSString stringWithFormat:@"Off"];
@@ -249,11 +249,11 @@
             if (self.selectedTest.difficulty == 13)
                 self.difficultyLabel.text = [NSString stringWithFormat:@"All"];
             else
-                self.difficultyLabel.text = [NSString stringWithFormat:@"%d", self.selectedTest.difficulty];
+                self.difficultyLabel.text = [NSString stringWithFormat:@"%ld", (long)self.selectedTest.difficulty];
         }
     }
     //Displays the number of questions total and correct
-    self.questionsLabel.text = [NSString stringWithFormat:@"%d/%d", correctQuestions, totalQuestions];
+    self.questionsLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)correctQuestions, (long)totalQuestions];
     
     //Registers custom UITableViewCell nib
     cardCellNib = [UINib nibWithNibName:@"RIPCardCell" bundle:nil];

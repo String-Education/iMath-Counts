@@ -44,7 +44,7 @@
     //Creates home page controller and places it in a navigation controller
     RIPHomePageViewController *home = [[RIPHomePageViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:home];
-    navController.navigationBar.backgroundColor = [UIColor darkGrayColor];
+    navController.navigationBar.barTintColor = [UIColor darkGrayColor];
     
     self.window.rootViewController = navController;
     

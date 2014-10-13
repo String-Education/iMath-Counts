@@ -69,6 +69,18 @@
     return (newLength > 3) ? NO : YES;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        self.firstNumLabel.font = [UIFont systemFontOfSize:72];
+        self.secondNumLabel.font = [UIFont systemFontOfSize:72];
+        self.operationLabel.font = [UIFont systemFontOfSize:72];
+        self.answerField.font = [UIFont systemFontOfSize:72];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -80,6 +92,9 @@
         RIPCardViewController *strongSelf = weakSelf;
         [strongSelf.answerField becomeFirstResponder];
     });
+    RIPTimeTestViewController *testController = (RIPTimeTestViewController *)self.parentViewController.parentViewController;
+    [testController.keyboard.done setEnabled:YES];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -96,12 +111,12 @@
     //Gets card at index
     self.displayedCard = sharedManager.cardStore[self.cardIndex];
     
-    self.questionNumLabel.text = [NSString stringWithFormat:@"#%d", (self.cardIndex + 1)];
+    self.questionNumLabel.text = [NSString stringWithFormat:@"#%ld", (self.cardIndex + 1)];
     
     //Configures subviews according to selected card
     //Reminder: don't use == when comparing strings
-    self.firstNumLabel.text = [NSString stringWithFormat:@"%d", self.displayedCard.firstNum];
-    self.secondNumLabel.text = [NSString stringWithFormat:@"%d", self.displayedCard.secondNum];
+    self.firstNumLabel.text = [NSString stringWithFormat:@"%ld", (long)self.displayedCard.firstNum];
+    self.secondNumLabel.text = [NSString stringWithFormat:@"%ld", (long)self.displayedCard.secondNum];
     if ([sharedManager.operation isEqualToString:ADDITION])
         self.operationLabel.text = @"+";
     else if ([sharedManager.operation isEqualToString:SUBTRACTION])
@@ -112,14 +127,13 @@
         self.operationLabel.text = @"÷";
     self.answerField.borderStyle = UITextBorderStyleRoundedRect;
     if (self.displayedCard.inputAnswer)
-        self.answerField.text = [NSString stringWithFormat:@"%d", self.displayedCard.inputAnswer];
+        self.answerField.text = [NSString stringWithFormat:@"%ld", (long)self.displayedCard.inputAnswer];
     self.displayedCard.isViewed = YES;
     
     
     RIPTimeTestViewController *testController = (RIPTimeTestViewController *)self.parentViewController.parentViewController;
     self.answerField.inputView = [[UIView alloc] initWithFrame:CGRectZero];
     testController.keyboard.target = self.answerField;
-    
     
     //Callback for when keyboard is dismissed
     [[NSNotificationCenter defaultCenter] addObserver:self

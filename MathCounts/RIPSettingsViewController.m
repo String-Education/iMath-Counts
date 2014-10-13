@@ -53,7 +53,10 @@
 
 - (void)dismissSettings:(id)sender
 {
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissPopover" object:self];
+    else
+        [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)showCreatePasswordPrompt

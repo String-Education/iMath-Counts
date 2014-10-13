@@ -140,6 +140,14 @@
 
 #pragma mark UIPickerView methods
 
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+//    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+//        return 72;
+//    }
+    return 32;
+}
+
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 3;
@@ -165,6 +173,9 @@
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
+    RIPDataManager *sharedManager = [RIPDataManager sharedManager];
+    if (!sharedManager.operation)
+        return nil;
     //Creates and configures a UILabel to display in the pickerView
     UILabel *tView = (UILabel *)view;
     

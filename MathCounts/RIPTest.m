@@ -210,7 +210,8 @@
         [cell setWraps:YES];
         
         percentCorrect = ((double)t.questionsCorrect / (double)t.questionsTotal) * 100.0;
-        cell = [workSheet setCellAtRow:idx column:1 toString:[NSString stringWithFormat:@"%d/%d (%.02f%%)", t.questionsCorrect, t.questionsTotal, percentCorrect]];
+        cell = [workSheet setCellAtRow:idx column:1 toString:[NSString stringWithFormat:@"%ld/%ld (%.02f%%)", (long)t.questionsCorrect, (long)
+                                                              t.questionsTotal, percentCorrect]];
         [cell setHorizontalAlignment:HALIGN_CENTER];
         [cell setFontHeight:160];
         [cell setWraps:YES];
@@ -227,7 +228,7 @@
             if (t.difficulty == 13)
                 difficulty = @"All";
             else
-                difficulty = [NSString stringWithFormat:@"%d", t.difficulty];
+                difficulty = [NSString stringWithFormat:@"%ld", (long)t.difficulty];
         }
         cell = [workSheet setCellAtRow:idx column:2 toString:difficulty];
         [cell setHorizontalAlignment:HALIGN_CENTER];
@@ -252,10 +253,10 @@
         } else {
             minutes = t.timeRemaining / 60;
             seconds = t.timeRemaining % 60;
-            timeRemaining = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            timeRemaining = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
             minutes = t.time / 60;
             seconds = t.time % 60;
-            totalTime = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+            totalTime = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
             
             cell = [workSheet setCellAtRow:idx column:4 toString:totalTime];
             [cell setHorizontalAlignment:HALIGN_CENTER];
@@ -327,7 +328,7 @@
         if (self.difficulty == 13)
             difficulty = @"All";
         else
-            difficulty = [NSString stringWithFormat:@"%d", self.difficulty];
+            difficulty = [NSString stringWithFormat:@"%ld", (long)self.difficulty];
     }
     cell = [workSheet setCellAtRow:1 column:1 toString:difficulty];
     [cell setHorizontalAlignment:HALIGN_CENTER];
@@ -350,10 +351,10 @@
     } else {
         minutes = self.timeRemaining / 60;
         seconds = self.timeRemaining % 60;
-        timeRemaining = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        timeRemaining = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
         minutes = self.time / 60;
         seconds = self.time % 60;
-        totalTime = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        totalTime = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
         cell = [workSheet setCellAtRow:1 column:3 toString:totalTime];
         [cell setHorizontalAlignment:HALIGN_CENTER];
         [cell setFontHeight:160];
@@ -365,7 +366,7 @@
     
     //Displays score and percent correct
     percentCorrect = ((double)self.questionsCorrect / (double)self.questionsTotal) * 100.0;
-    cell = [workSheet setCellAtRow:1 column:5 toString:[NSString stringWithFormat:@"%d/%d (%.02f%%)", self.questionsCorrect, self.questionsTotal, percentCorrect]];
+    cell = [workSheet setCellAtRow:1 column:5 toString:[NSString stringWithFormat:@"%ld/%ld (%.02f%%)", (long)self.questionsCorrect, (long)self.questionsTotal, percentCorrect]];
     [cell setHorizontalAlignment:HALIGN_CENTER];
     [cell setFontHeight:160];
     
@@ -398,20 +399,20 @@
         
         //Displays the question on the card
         if ([self.operation isEqualToString:ADDITION])
-            cell = [workSheet setCellAtRow:(i + 4) column:1 toString:[NSString stringWithFormat:@"%d + %d", c.firstNum, c.secondNum]];
+            cell = [workSheet setCellAtRow:(i + 4) column:1 toString:[NSString stringWithFormat:@"%ld + %ld", (long)c.firstNum, (long)c.secondNum]];
         else if ([self.operation isEqualToString:SUBTRACTION])
-            cell = [workSheet setCellAtRow:(i + 4) column:1 toString:[NSString stringWithFormat:@"%d - %d", c.firstNum, c.secondNum]];
+            cell = [workSheet setCellAtRow:(i + 4) column:1 toString:[NSString stringWithFormat:@"%ld - %ld", (long)c.firstNum, (long)c.secondNum]];
         else if ([self.operation isEqualToString:MULTIPLICATION])
-            cell = [workSheet setCellAtRow:(i + 4) column:1 toString:[NSString stringWithFormat:@"%d x %d", c.firstNum, c.secondNum]];
+            cell = [workSheet setCellAtRow:(i + 4) column:1 toString:[NSString stringWithFormat:@"%ld x %ld", (long)c.firstNum, (long)c.secondNum]];
         else if ([self.operation isEqualToString:DIVISION])
-            cell = [workSheet setCellAtRow:(i + 4) column:1 toString:[NSString stringWithFormat:@"%d ÷ %d", c.firstNum, c.secondNum]];
+            cell = [workSheet setCellAtRow:(i + 4) column:1 toString:[NSString stringWithFormat:@"%ld ÷ %ld", (long)c.firstNum, (long)c.secondNum]];
         [cell setHorizontalAlignment:HALIGN_CENTER];
         [cell setFontHeight:160];
         if (!c.isAnswered)
             [cell setFontColor:COLOR_RED];
         
         //Displays the correct answer
-        cell = [workSheet setCellAtRow:(i + 4) column:2 toString:[NSString stringWithFormat:@"%d", c.answer]];
+        cell = [workSheet setCellAtRow:(i + 4) column:2 toString:[NSString stringWithFormat:@"%ld", (long)c.answer]];
         [cell setHorizontalAlignment:HALIGN_CENTER];
         [cell setFontHeight:160];
         if (!c.isAnswered)
@@ -419,7 +420,7 @@
         
         //Displays the student answer if one is given
         if (c.isAnswered)
-            cell = [workSheet setCellAtRow:(i + 4) column:3 toString:[NSString stringWithFormat:@"%d", c.inputAnswer]];
+            cell = [workSheet setCellAtRow:(i + 4) column:3 toString:[NSString stringWithFormat:@"%ld", (long)c.inputAnswer]];
         else
             cell = [workSheet setCellAtRow:(i + 4) column:3 toString:@"-"];
         [cell setHorizontalAlignment:HALIGN_CENTER];

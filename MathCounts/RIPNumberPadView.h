@@ -12,4 +12,6 @@
 
 @property(nonatomic, assign) UITextField* target;
 
+@property (strong, nonatomic) UIButton *done;
+
 @end

@@ -22,7 +22,6 @@
 @property (strong, nonatomic) UIButton *seven;
 @property (strong, nonatomic) UIButton *eight;
 @property (strong, nonatomic) UIButton *nine;
-@property (strong, nonatomic) UIButton *done;
 @property (strong, nonatomic) UIButton *delete;
 
 @end
@@ -35,7 +34,6 @@
     if (self) {
         self.backgroundColor = [UIColor lightGrayColor];
         self.target.delegate = self;
-        
     }
     return self;
 }
@@ -113,76 +111,99 @@
     [[UIButton appearance] setBackgroundImage:[UIImage imageNamed:@"NumberNormal"] forState:UIControlStateNormal];
     [[UIButton appearance] setBackgroundImage:[UIImage imageNamed:@"NumberSelected"] forState:UIControlStateHighlighted];
     
+    
     self.one = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.two = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.three = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.four = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.five = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.six = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.seven = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.eight = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.nine = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.zero = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.delete = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.done = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        CGFloat fontSize = 32;
+        [[self.one titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.two titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.three titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.four titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.five titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.six titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.seven titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.eight titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.nine titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.zero titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.delete titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+        [[self.done titleLabel] setFont:[UIFont systemFontOfSize:fontSize]];
+    }
+
     [self.one setTitle:@"1" forState:UIControlStateNormal];
-    [self.one setFrame:CGRectMake(rect.origin.x, rect.origin.y + testBorder.size.height, button.size.width, button.size.height)];
+    [self.one setFrame:CGRectMake(rect.origin.x, rowThree.origin.y, button.size.width, button.size.height)];
     [self.one addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.one];
     
-    self.two = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     [self.two setTitle:@"2" forState:UIControlStateNormal];
-    [self.two setFrame:CGRectMake(columnTwo.origin.x, rect.origin.y + testBorder.size.height, button.size.width, button.size.height)];
+    [self.two setFrame:CGRectMake(columnTwo.origin.x, rowThree.origin.y, button.size.width, button.size.height)];
     [self.two addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.two];
     
-    self.three = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     [self.three setTitle:@"3" forState:UIControlStateNormal];
-    [self.three setFrame:CGRectMake(columnThree.origin.x, rect.origin.y + testBorder.size.height, button.size.width, button.size.height)];
+    [self.three setFrame:CGRectMake(columnThree.origin.x, rowThree.origin.y, button.size.width, button.size.height)];
     [self.three addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.three];
     
-    self.four = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.four setTitle:@"4" forState:UIControlStateNormal];
     [self.four setFrame:CGRectMake(rect.origin.x, rowTwo.origin.y, button.size.width, button.size.height)];
     [self.four addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.four];
     
-    self.five = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.five setTitle:@"5" forState:UIControlStateNormal];
     [self.five setFrame:CGRectMake(columnTwo.origin.x, rowTwo.origin.y, button.size.width, button.size.height)];
     [self.five addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.five];
     
-    self.six = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.six setTitle:@"6" forState:UIControlStateNormal];
     [self.six setFrame:CGRectMake(columnThree.origin.x, rowTwo.origin.y, button.size.width, button.size.height)];
     [self.six addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.six];
     
-    self.seven = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.seven setTitle:@"7" forState:UIControlStateNormal];
-    [self.seven setFrame:CGRectMake(rect.origin.x, rowThree.origin.y, button.size.width, button.size.height)];
+    [self.seven setFrame:CGRectMake(rect.origin.x, rect.origin.y + testBorder.size.height, button.size.width, button.size.height)];
     [self.seven addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.seven];
     
-    self.eight = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     [self.eight setTitle:@"8" forState:UIControlStateNormal];
-    [self.eight setFrame:CGRectMake(columnTwo.origin.x, rowThree.origin.y, button.size.width, button.size.height)];
+    [self.eight setFrame:CGRectMake(columnTwo.origin.x, rect.origin.y + testBorder.size.height, button.size.width, button.size.height)];
     [self.eight addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.eight];
     
-    self.nine = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.nine setTitle:@"9" forState:UIControlStateNormal];
-    [self.nine setFrame:CGRectMake(columnThree.origin.x, rowThree.origin.y, button.size.width, button.size.height)];
+    [self.nine setFrame:CGRectMake(columnThree.origin.x, rect.origin.y + testBorder.size.height, button.size.width, button.size.height)];
     [self.nine addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.nine];
     
-    self.zero = [UIButton buttonWithType:UIButtonTypeCustom];
+    
     [self.zero setTitle:@"0" forState:UIControlStateNormal];
     [self.zero setFrame:CGRectMake(columnTwo.origin.x, rowFour.origin.y, button.size.width, button.size.height)];
     [self.zero addTarget:self action:@selector(addNumber:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.zero];
     
     [[UIButton appearance] setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@Normal", sharedManager.operation]] forState:UIControlStateNormal];
+    [[UIButton appearance] setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@Normal", sharedManager.operation]] forState:UIControlStateDisabled];
     [[UIButton appearance] setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    self.delete = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.delete setTitle:@"Delete" forState:UIControlStateNormal];
     [self.delete setFrame:CGRectMake(rect.origin.x, rowFour.origin.y, button.size.width, button.size.height)];
     [self.delete addTarget:self action:@selector(clearTextField:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.delete];
     
-    self.done = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.done setTitle:@"Done" forState:UIControlStateNormal];
     [self.done setFrame:CGRectMake(columnThree.origin.x, rowFour.origin.y, button.size.width, button.size.height)];
     [self.done addTarget:self action:@selector(doneEditing:) forControlEvents:UIControlEventTouchUpInside];

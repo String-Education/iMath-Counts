@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="5056"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RIPTimeTestViewController">
             <connections>
+                <outlet property="cardViewRect" destination="BfR-O9-190" id="29b-1O-TUg"/>
+                <outlet property="numpadRect" destination="KOC-Q8-EQG" id="D51-ly-bM8"/>
                 <outlet property="view" destination="14S-po-AjN" id="Cvs-SK-f3H"/>
             </connections>
         </placeholder>
@@ -13,7 +16,29 @@
         <view contentMode="scaleToFill" id="14S-po-AjN">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BfR-O9-190">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="355"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOC-Q8-EQG">
+                    <rect key="frame" x="0.0" y="355" width="320" height="213"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" red="0.75686281919999998" green="0.90196084980000002" blue="0.047058828179999998" alpha="1" colorSpace="deviceRGB"/>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="KOC-Q8-EQG" secondAttribute="trailing" id="2Nb-I8-pJP"/>
+                <constraint firstItem="BfR-O9-190" firstAttribute="top" secondItem="14S-po-AjN" secondAttribute="top" id="PPO-IU-tjp"/>
+                <constraint firstItem="KOC-Q8-EQG" firstAttribute="top" secondItem="BfR-O9-190" secondAttribute="bottom" id="VIY-93-s3A"/>
+                <constraint firstAttribute="trailing" secondItem="BfR-O9-190" secondAttribute="trailing" id="Yke-Bf-a3G"/>
+                <constraint firstItem="KOC-Q8-EQG" firstAttribute="leading" secondItem="14S-po-AjN" secondAttribute="leading" id="cMw-hI-g0c"/>
+                <constraint firstAttribute="bottom" secondItem="KOC-Q8-EQG" secondAttribute="bottom" id="dZE-QH-2TH"/>
+                <constraint firstItem="BfR-O9-190" firstAttribute="height" secondItem="KOC-Q8-EQG" secondAttribute="height" multiplier="5/3" id="tep-Zp-YvM"/>
+                <constraint firstItem="BfR-O9-190" firstAttribute="leading" secondItem="14S-po-AjN" secondAttribute="leading" id="v9s-ml-rbQ"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

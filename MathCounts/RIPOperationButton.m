@@ -67,6 +67,7 @@
         NSNotification *buttonEnabled = [NSNotification notificationWithName:@"buttonEnabled" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:buttonEnabled];
     }
+    [self.button setBackgroundImage:nil forState:UIControlStateDisabled];
     [self.button setEnabled:NO];
     [self performSelector:@selector(enableButton:) withObject:nil afterDelay:0.25];
     [self.bgCircle animateCircle];
@@ -81,7 +82,8 @@
         [self.button setSelected:NO];
     }
     [self.button setImage:self.image forState:UIControlStateDisabled];
-    [self.button setEnabled:NO];
+    [self.button setBackgroundImage:nil forState:UIControlStateDisabled];
+    [self.button setEnabled:NO]; //this is fucking dumb
     [self performSelector:@selector(enableButton:) withObject:nil afterDelay:0.25];
 }
 

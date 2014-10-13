@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ZX-Fl-xwP">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="44"/>
+                    <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <items>
+                        <navigationItem id="QoI-hY-suu"/>
+                    </items>
+                </navigationBar>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dEk-lk-AEH">
+                    <rect key="frame" x="0.0" y="436" width="480" height="44"/>
+                    <items/>
+                    <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="deviceRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dEk-lk-AEH" secondAttribute="trailing" id="036-Pu-CEZ"/>
+                <constraint firstItem="dEk-lk-AEH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9jH-Kk-ikR"/>
+                <constraint firstItem="5ZX-Fl-xwP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="L3W-w7-WZI"/>
+                <constraint firstAttribute="centerX" secondItem="dEk-lk-AEH" secondAttribute="centerX" id="LhV-9w-lI1"/>
+                <constraint firstAttribute="bottom" secondItem="dEk-lk-AEH" secondAttribute="bottom" id="d6v-ZK-1dl"/>
+                <constraint firstItem="5ZX-Fl-xwP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hRp-YB-JqX"/>
+                <constraint firstAttribute="centerX" secondItem="5ZX-Fl-xwP" secondAttribute="centerX" id="taz-Ha-P9G"/>
+                <constraint firstAttribute="trailing" secondItem="5ZX-Fl-xwP" secondAttribute="trailing" id="yPD-KI-Z0b"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="404" y="445"/>
+        </view>
+    </objects>
+</document>

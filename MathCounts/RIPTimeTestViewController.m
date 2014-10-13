@@ -18,6 +18,8 @@
 @property (strong, nonatomic) UIPageViewController *pageController;
 @property (strong, nonatomic) NSTimer *timer;
 @property (strong, nonatomic) UIBarButtonItem *submitItem;
+@property (weak, nonatomic) IBOutlet UIView *cardViewRect;
+@property (weak, nonatomic) IBOutlet UIView *numpadRect;
 
 @end
 
@@ -49,7 +51,7 @@
         sharedManager.timeRemaining--;
         minutes = sharedManager.timeRemaining / 60;
         seconds = sharedManager.timeRemaining % 60;
-        self.timerLabel = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        self.timerLabel = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
         self.navigationItem.title = self.timerLabel;
     } else if (sharedManager.timeRemaining == 0) {
         RIPResultsViewController *results = [[RIPResultsViewController alloc] init];
@@ -99,7 +101,8 @@
     }
     //If a card is found, creates a view controller with it and displays it
     if (unansweredCardFound) {
-        cardViewToDisplay = [[RIPCardViewController alloc] initWithCardIndex:index];        
+        cardViewToDisplay = [[RIPCardViewController alloc] initWithCardIndex:index];
+        [self.keyboard.done setEnabled:NO];
         if (index > pos) {
             [self.pageController setViewControllers:@[cardViewToDisplay]
                                           direction:UIPageViewControllerNavigationDirectionForward
@@ -206,6 +209,16 @@
     return cardViewController;
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [self.keyboard setFrame:self.numpadRect.frame];
+    [[self.pageController view] setFrame:self.cardViewRect.frame];
+    
+    [self.view layoutSubviews];
+}
+
 #pragma mark View methods
 
 - (void)viewDidLoad
@@ -220,11 +233,8 @@
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     
     [[self view] setBackgroundColor:[UIColor colorWithRed:0.94 green:0.94 blue:0.96 alpha:1.0]];
-    
-    CGRect viewBounds = [[self view] bounds];
-    
-    CGRect testBounds = CGRectMake(viewBounds.origin.x, ((4.0 * viewBounds.size.height) / 7.0), viewBounds.size.width, ((3.0 * viewBounds.size.height) / 7.0));
-    self.keyboard = [[RIPNumberPadView alloc] initWithFrame:testBounds];
+        
+    self.keyboard = [[RIPNumberPadView alloc] initWithFrame:self.numpadRect.frame];
     [[self view] addSubview:self.keyboard];
     
     //Creates and displays the timer with an initial time
@@ -232,7 +242,7 @@
     if (time) {
         minutes = time / 60;
         seconds = time % 60;
-        self.timerLabel = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        self.timerLabel = [NSString stringWithFormat:@"%02ld:%02ld", (long)minutes, (long)seconds];
         self.navigationItem.title = self.timerLabel;
         self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                                       target:self
@@ -269,12 +279,11 @@
     self.pageController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:nil];
-    CGRect pageControllerBounds = CGRectMake(viewBounds.origin.x, viewBounds.origin.y, viewBounds.size.width, ((4.0 * viewBounds.size.height) / 7.0));
     self.pageController.dataSource = self;
     self.pageController.delegate = self;
     self.pageController.automaticallyAdjustsScrollViewInsets = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [[self.pageController view] setFrame:pageControllerBounds];
+    [[self.pageController view] setFrame:self.cardViewRect.frame];
     [self addChildViewController:self.pageController];
     [[self view] addSubview:[self.pageController view]];
     [self.pageController didMoveToParentViewController:self];
