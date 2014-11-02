@@ -88,9 +88,9 @@
     CGRect testBorder = CGRectMake(0, 0, rect.size.width, ((rect.size.height - 3.0) / 9.0));
     UIView *border = [[UIView alloc] initWithFrame:testBorder];
     if ([sharedManager.operation isEqualToString:ADDITION])
-        border.backgroundColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+        border.backgroundColor = [UIColor colorWithRed:0.7 green:0.1 blue:0.1 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:SUBTRACTION])
-        border.backgroundColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+        border.backgroundColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.7 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:MULTIPLICATION])
         border.backgroundColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:DIVISION])

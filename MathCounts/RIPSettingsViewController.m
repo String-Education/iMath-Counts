@@ -199,9 +199,9 @@
     //Sets the navigation bar color
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     if ([sharedManager.operation isEqualToString:ADDITION])
-        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.7 green:0.1 blue:0.1 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:SUBTRACTION])
-        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.7 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:MULTIPLICATION])
         self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:DIVISION])

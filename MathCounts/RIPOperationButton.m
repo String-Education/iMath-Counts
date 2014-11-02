@@ -32,7 +32,7 @@
         else
             self.operationColor = self.grayColor;
         self.operationName = name;
-        self.image = [UIImage imageNamed:name];
+        self.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@Selected", name]];
         self.imageHighlight = [UIImage imageNamed:[NSString stringWithFormat:@"%@Selected", name]];
     }
     return self;
@@ -59,6 +59,7 @@
         [RIPDataManager sharedManager].operation = nil;
         NSNotification *buttonDisabled = [NSNotification notificationWithName:@"buttonDisabled" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:buttonDisabled];
+        [self.bgCircle animateCircleContract];
     } else {
         [self.button setImage:self.imageHighlight forState:UIControlStateHighlighted];
         self.bgCircle.circleColor = self.operationColor;
@@ -66,11 +67,11 @@
         [RIPDataManager sharedManager].operation = self.operationName;
         NSNotification *buttonEnabled = [NSNotification notificationWithName:@"buttonEnabled" object:self];
         [[NSNotificationCenter defaultCenter] postNotification:buttonEnabled];
+        [self.bgCircle animateCircleExpand];
     }
     [self.button setBackgroundImage:nil forState:UIControlStateDisabled];
     [self.button setEnabled:NO];
     [self performSelector:@selector(enableButton:) withObject:nil afterDelay:0.25];
-    [self.bgCircle animateCircle];
 }
 
 - (void)deselectButton
@@ -80,6 +81,7 @@
         [self.button setImage:self.image forState:UIControlStateHighlighted];
         self.bgCircle.circleColor = self.grayColor;
         [self.button setSelected:NO];
+        [self.bgCircle animateCircleContract];
     }
     [self.button setImage:self.image forState:UIControlStateDisabled];
     [self.button setBackgroundImage:nil forState:UIControlStateDisabled];

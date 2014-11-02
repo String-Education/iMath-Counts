@@ -236,10 +236,10 @@
     //Displays operation
     if ([t.operation isEqualToString:ADDITION]) {
         cell.operationLabel.text = @"+";
-        cell.operationLabel.textColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+        cell.operationLabel.textColor = [UIColor colorWithRed:0.7 green:0.1 blue:0.1 alpha:1.0];
     } else if ([t.operation isEqualToString:SUBTRACTION]) {
         cell.operationLabel.text = @"-";
-        cell.operationLabel.textColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+        cell.operationLabel.textColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.7 alpha:1.0];
     } else if ([t.operation isEqualToString:MULTIPLICATION]) {
         cell.operationLabel.text = @"x";
         cell.operationLabel.textColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
@@ -292,9 +292,9 @@
     
     RIPDataManager *sharedManager = [RIPDataManager sharedManager];
     if ([sharedManager.operation isEqualToString:ADDITION])
-        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.7 green:0.1 blue:0.1 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:SUBTRACTION])
-        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+        self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.7 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:MULTIPLICATION])
         self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:DIVISION])
@@ -318,7 +318,7 @@
                                             otherButtonTitles:@"Yes", nil];
     
     //Configures search keyboard to have return key
-    for (UIView *subview in self.nameSearchBar.subviews)
+    /*for (UIView *subview in self.nameSearchBar.subviews)
     {
         for (UIView *subSubview in subview.subviews)
         {
@@ -331,7 +331,7 @@
                 break;
             }
         }
-    }
+    }*/
     [self.testTableView setAlwaysBounceVertical:NO];
     self.testTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.testTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectZero];

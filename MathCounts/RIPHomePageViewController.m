@@ -118,10 +118,10 @@
                                      RIPHomePageViewController *strongSelf = weakSelf;
                                      [strongSelf.mvc.view setNeedsDisplay];
                                      if ([sharedManager.operation isEqualToString:ADDITION]) {
-                                         strongSelf.settingsBar.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+                                         strongSelf.settingsBar.barTintColor = [UIColor colorWithRed:0.7 green:0.1 blue:0.1 alpha:1.0];
                                          [strongSelf.mvc.addButton.button setSelected:YES];
                                      } else if ([sharedManager.operation isEqualToString:SUBTRACTION]) {
-                                         strongSelf.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+                                         strongSelf.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.7 alpha:1.0];
                                          [strongSelf.mvc.subtractButton.button setSelected:YES];
                                      } else if ([sharedManager.operation isEqualToString:MULTIPLICATION]) {
                                          strongSelf.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
@@ -189,9 +189,9 @@
     
     //Sets toolbar's color appropriately
     if ([sharedManager.operation isEqualToString:ADDITION])
-        self.settingsBar.barTintColor = [UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0];
+        self.settingsBar.barTintColor = [UIColor colorWithRed:0.7 green:0.1 blue:0.1 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:SUBTRACTION])
-        self.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.5 alpha:1.0];
+        self.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.3 blue:0.7 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:MULTIPLICATION])
         self.settingsBar.barTintColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
     else if ([sharedManager.operation isEqualToString:DIVISION])

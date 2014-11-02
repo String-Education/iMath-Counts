@@ -11,7 +11,7 @@
 @interface RIPCircleView ()
 
 @property (nonatomic) CGFloat resizeRatio;
-@property (nonatomic) CAShapeLayer *pathLayer;
+@property (strong, nonatomic) CAShapeLayer *pathLayer;
 
 @end
 
@@ -67,18 +67,34 @@
     return circlePath;
 }
 
-- (void)animateCircle
+- (void)animateCircleExpand
 {
     //Animates the circle to expand/contract
     self.pathLayer.fillColor = [self.circleColor CGColor];
     [self.pathLayer setNeedsDisplay];
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform"];
-    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     anim.duration = 0.25;
     anim.repeatCount = 1;
-    anim.autoreverses = YES;
-    anim.removedOnCompletion = YES;
+    anim.autoreverses = NO;
+    anim.removedOnCompletion = NO;
+    anim.fillMode = kCAFillModeForwards;
     anim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(self.resizeRatio, self.resizeRatio, 1.0)];
+    [self.pathLayer addAnimation:anim forKey:nil];
+}
+
+- (void)animateCircleContract {
+    //Animates the circle to expand/contract
+    self.pathLayer.fillColor = [self.circleColor CGColor];
+    [self.pathLayer setNeedsDisplay];
+    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform"];
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    anim.duration = 0.25;
+    anim.repeatCount = 1;
+    anim.autoreverses = NO;
+    anim.removedOnCompletion = NO;
+    anim.fillMode = kCAFillModeForwards;
+    anim.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1 / self.resizeRatio, 1 / self.resizeRatio, 1.0)];
     [self.pathLayer addAnimation:anim forKey:nil];
 }
 

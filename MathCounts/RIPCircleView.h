@@ -10,7 +10,8 @@
 
 @interface RIPCircleView : UIView
 
-- (void)animateCircle;
+- (void)animateCircleExpand;
+- (void)animateCircleContract;
 
 @property (strong, nonatomic) UIColor *circleColor;
 
